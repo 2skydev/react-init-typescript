@@ -1,8 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "tests",
+  "collectionName": "posts",
   "info": {
-    "name": "test"
+    "name": "post"
   },
   "options": {
     "increments": true,
@@ -11,8 +11,16 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "a": {
+    "title": {
       "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "posts"
     }
   }
 }

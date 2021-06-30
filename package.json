@@ -1,19 +1,14 @@
 {
   "name": "root",
   "private": true,
+  "workspaces": [
+    "packages/*",
+    "packages/frontend/*"
+  ],
   "devDependencies": {
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^3.4.0",
-    "lerna": "^4.0.0",
-    "prettier": "^2.3.0"
+    "lerna": "^4.0.0"
   },
   "scripts": {
-    "start": "lerna run develop --stream",
-    "boot": "lerna bootstrap"
-  },
-  "dependencies": {
-    "lodash": "^4.17.21",
-    "moment": "^2.29.1",
-    "shared": "file:packages/shared"
+    "start": "lerna run develop --stream"
   }
 }

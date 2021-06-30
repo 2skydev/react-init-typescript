@@ -1,3 +1,5 @@
+// 해당 파일은 strapi 구조를 typescript로 내보내기 위한 설정 파일입니다
+
 /**
  * @type {import('strapi-to-typescript')}
  */
@@ -7,8 +9,8 @@ const config = {
    */
   input: [
     'api',
-    './node_modules/strapi-plugin-users-permissions/models/',
-    './node_modules/strapi-plugin-upload/models/'
+    '../../node_modules/strapi-plugin-users-permissions/models/',
+    '../../node_modules/strapi-plugin-upload/models/'
   ],
   // components: './components/',
   output: '../shared/types/strapi/',
