@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
-const {appPath, appSrc} = require('react-scripts/config/paths');
-
+const { appPath, appSrc } = require('react-scripts/config/paths');
+const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const jsconfig = require(path.resolve(appPath, 'tsconfig.path.json'));
 
 module.exports = {
@@ -28,7 +28,11 @@ module.exports = {
       }),
       {},
     );
-    
+
+    config.resolve.plugins = config.resolve.plugins.filter(
+      plugin => !(plugin instanceof ModuleScopePlugin),
+    );
+
     config.resolve.alias = {
       ...config.resolve.alias,
       ...aliasPaths,

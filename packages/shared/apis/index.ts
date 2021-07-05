@@ -1,8 +1,7 @@
-import escapeStringRegexp from 'escape-string-regexp';
-
 import React from 'react';
 
 import axios from 'axios';
+import escapeStringRegexp from 'escape-string-regexp';
 import useSWR, { Key, mutate } from 'swr';
 
 import { dev, pro } from 'shared/config';
