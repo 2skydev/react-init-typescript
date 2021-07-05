@@ -3,12 +3,20 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-router-dom": "^5.1.7",
     "antd": "^4.16.6",
     "axios": "^0.21.1",
     "escape-string-regexp": "^5.0.0",
     "formik": "^2.2.9",
     "qs": "^6.10.1",
-    "swr": "^0.5.6"
+    "swr": "^0.5.6",
+    "yup": "^0.32.9",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@types/qs": "^6.9.6"
