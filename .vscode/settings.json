@@ -11,5 +11,7 @@
   "prettier.stylelintIntegration": true,
   "prettier.tslintIntegration": true,
   "eslint.runtime": "yarn",
-  "eslint.run": "onSave"
+  "eslint.run": "onSave",
+  "typescript.suggest.includeCompletionsForImportStatements": false,
+  "typescript.preferences.importModuleSpecifier": "shortest"
 }
