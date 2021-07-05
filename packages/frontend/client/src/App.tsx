@@ -1,10 +1,17 @@
-function App() {
+import Abc from './Abc'
+import { SWRConfig } from 'swr'
+import axios from 'shared/apis'
 
+
+function App() {
   return (
-    <div className="App">
-      hello world !! (client)
-    </div>
+    <SWRConfig value={{
+      revalidateOnFocus: false,
+      fetcher: url => axios.get(url)
+    }}>
+      <Abc />
+    </SWRConfig>
   )
 }
 
-export default App;
+export default App

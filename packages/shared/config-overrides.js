@@ -1,8 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
-const {appPath} = require('react-scripts/config/paths');
+const {appPath, appSrc} = require('react-scripts/config/paths');
 
-const jsconfig = require(path.resolve(appPath, 'tsconfig.base.json'));
+const jsconfig = require(path.resolve(appPath, 'tsconfig.path.json'));
 
 module.exports = {
   webpack: config => {
@@ -28,11 +28,18 @@ module.exports = {
       }),
       {},
     );
-
+    
     config.resolve.alias = {
       ...config.resolve.alias,
       ...aliasPaths,
     };
+
+    /*
+     * change typescript rule
+     */
+    const tsRule = config.module.rules[1].oneOf[2];
+    tsRule.include = undefined;
+    tsRule.exclude = /node_modules/;
 
     // return updated config
     return config;

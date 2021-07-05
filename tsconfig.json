@@ -21,6 +21,7 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
+    "packages/frontend/*/src",
+    "packages/shared"
   ]
 }
