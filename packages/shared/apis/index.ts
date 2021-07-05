@@ -1,6 +1,10 @@
-import axios from 'axios';
 import escapeStringRegexp from 'escape-string-regexp';
+
 import React from 'react';
+
+import axios from 'axios';
+import useSWR, { Key, mutate } from 'swr';
+
 import { dev, pro } from 'shared/config';
 import {
   IAction,
@@ -9,7 +13,6 @@ import {
   IUseGetReturn,
   TMethod,
 } from 'shared/types/apis/index';
-import useSWR, { Key, mutate } from 'swr';
 
 const isDev: boolean = process.env.NODE_ENV === 'development';
 export const API_HOST_DEV: string = dev.api.host || window.location.host;
@@ -118,8 +121,7 @@ const actionStateReducer = (
  * react-query의 useMutation 함수와 같이 만든 함수
  */
 export const useAction = (
-  method: TMethod,
-  url: string,
+  asyncFn: AsyncGeneratorFunction,
   mutateKeys: Key[] = [],
 ): IUseActionReturn => {
   const [state, dispatch] = React.useReducer(
@@ -127,11 +129,11 @@ export const useAction = (
     actionInitState,
   );
 
-  const action = async (data: any) => {
+  const action = async (...data: any) => {
     dispatch({ key: 'actionBefore' });
 
     try {
-      const res = await instanceAxios[method](url, data);
+      const res = await asyncFn(...data);
 
       for (const mutateKey of mutateKeys) {
         mutate(mutateKey);

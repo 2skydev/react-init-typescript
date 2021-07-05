@@ -24,6 +24,7 @@
     "start:client": "lerna run develop --stream --scope client",
     "start:admin": "lerna run develop --stream --scope admin",
     "start:backend": "lerna run develop --stream --scope backend",
-    "start:all": "lerna run develop --stream --scope admin --scope client --scope backend"
+    "start:all": "lerna run develop --stream --scope admin --scope client --scope backend",
+    "kill-port": "npx kill-port --port 3000,3001,1337"
   }
 }
