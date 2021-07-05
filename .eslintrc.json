@@ -4,15 +4,8 @@
     "project": "./tsconfig.json",
     "sourceType": "module"
   },
-  "plugins": [
-    "@typescript-eslint",
-    "simple-import-sort"
-  ],
-  "ignorePatterns": [
-    "dist/",
-    "node_modules/",
-    "config-overrides.js"
-  ],
+  "plugins": ["@typescript-eslint", "simple-import-sort"],
+  "ignorePatterns": ["dist/", "node_modules/", "config-overrides.js"],
   "extends": [
     "react-app",
     "eslint:recommended",
@@ -26,6 +19,7 @@
     "simple-import-sort/imports": "warn",
     "simple-import-sort/exports": "warn",
     "@typescript-eslint/ban-ts-comment": "off",
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off"
   }
 }
