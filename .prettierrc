@@ -23,7 +23,7 @@
   ],
   "importOrder": [
     "react",
-    "^(?!shared)([a-zA-Z@]*)$",
+    "^(?!shared)([a-zA-Z@\\-]*)$",
     "^shared/(.*)$",
     "^[./]"
   ],
