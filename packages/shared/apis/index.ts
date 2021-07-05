@@ -157,4 +157,10 @@ export const useAction = (
   };
 };
 
+export const useActionAPI = (table: string, mutateKeys: Key[] = []) => {
+  // return useAction(async () => {
+  //   instanceAxios
+  // }, )
+};
+
 export default instanceAxios;
