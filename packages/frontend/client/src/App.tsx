@@ -5,6 +5,7 @@ import { SWRConfig } from 'swr';
 
 import MiddlewareRoute from 'shared/MiddlewareRoute';
 import axios from 'shared/apis';
+import { Test } from 'shared/components/form/Form';
 import MiddlewareSwitch from 'shared/components/route/MiddlewareSwitch';
 
 import Abc from './Abc';
@@ -21,7 +22,9 @@ function App() {
         <MiddlewareSwitch></MiddlewareSwitch>
         <MiddlewareRoute></MiddlewareRoute>
       </BrowserRouter>
-      <Abc></Abc>
+
+      <Abc />
+      <Test />
     </SWRConfig>
   );
 }
