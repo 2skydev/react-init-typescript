@@ -7,6 +7,7 @@ import { SWRConfig } from 'swr';
 import axios from 'shared/apis';
 
 import Abc from './Abc';
+import Form from 'shared/components/form/Form';
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
         >
             <BrowserRouter></BrowserRouter>
             <Abc />
+            <Form />
         </SWRConfig>
     );
 }
