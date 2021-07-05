@@ -9,6 +9,7 @@
     "@types/react-dom": "^17.0.0",
     "axios": "^0.21.1",
     "clsx": "^1.1.1",
+    "dotenv": "^10.0.0",
     "framer-motion": "^4.1.9",
     "immer": "^9.0.2",
     "mime-types": "^2.1.30",
@@ -26,8 +27,8 @@
   },
   "config-overrides-path": "../../shared/config-overrides.js",
   "scripts": {
-    "develop": "PORT=3001 react-app-rewired start",
-    "build": "PORT=3001 react-app-rewired build"
+    "develop": "react-app-rewired start",
+    "build": "react-app-rewired build"
   },
   "eslintConfig": {
     "extends": [
