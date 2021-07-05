@@ -10,15 +10,23 @@
   "quoteProps": "as-needed",
   "semi": true,
   "singleQuote": true,
-  "tabWidth": 2,
+  "tabWidth": 4,
   "trailingComma": "all",
   "useTabs": false,
-  "overrides": [ 
+  "overrides": [
     {
       "files": "*.json",
       "options": {
         "printWidth": 200
       }
     }
-  ]
+  ],
+  "importOrder": [
+    "react",
+    "^(?!shared)([a-zA-Z@]*)$",
+    "^shared/(.*)$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "experimentalBabelParserPluginsList": ["jsx", "typescript", "typescriptreact"]
 }
