@@ -6,11 +6,11 @@ import { BrowserRouter } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
 import axios from 'shared/apis';
-import { Test } from 'shared/components/form/Form';
 import MiddlewareRoute from 'shared/components/route/MiddlewareRoute';
 import MiddlewareSwitch from 'shared/components/route/MiddlewareSwitch';
 
 import Abc from './Abc';
+import { Test } from './Test';
 
 function App() {
   return (
