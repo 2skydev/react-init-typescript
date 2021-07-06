@@ -32,5 +32,7 @@ export interface IUseActionReturn {
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
-  action: (data: any) => Promise<any>;
+  data: any;
+  error: any;
+  action: (...data: any) => Promise<any>;
 }

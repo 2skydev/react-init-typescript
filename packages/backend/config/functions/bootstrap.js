@@ -1,7 +1,5 @@
-'use strict';
-
-const { exec } = require("child_process");
-const chalk = require("chalk");
+const { exec } = require('child_process');
+const chalk = require('chalk');
 
 /**
  * An asynchronous bootstrap function that runs before
@@ -14,18 +12,5 @@ const chalk = require("chalk");
  */
 
 module.exports = () => {
-  exec('npm run types', (err, stdout, stderr) => {
-    if (stderr.trim().length) {
-      const deleteMessage = 'node binary npm was executed with.'
-
-      console.log(chalk.bgRed('Types export error!'))
-
-      const arr = stderr.split(deleteMessage)
-      arr.shift()
-
-      console.error(arr.join(deleteMessage))
-    } else {
-      console.log('📖 Type export complete!')
-    }
-  })
+  exec('npm run types');
 };

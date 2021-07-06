@@ -5,11 +5,13 @@
     "sourceType": "module"
   },
   "plugins": [
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "react-hooks"
   ],
   "ignorePatterns": [
     "dist/",
     "node_modules/",
+    "backend/",
     "config-overrides.js"
   ],
   "extends": [
@@ -24,6 +26,8 @@
     "import/no-anonymous-default-export": "off",
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off"
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "react-hooks/rules-of-hooks": "off",
+    "react-hooks/exhaustive-deps": "off"
   }
 }
