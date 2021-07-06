@@ -113,14 +113,16 @@ const actionStateReducer = (
     }
   }
 
-  return state;
+  return {
+    ...state,
+  };
 };
 
 /*
  * react-query의 useMutation 함수와 같이 만든 함수
  */
 export const useAction = (
-  asyncFn: AsyncGeneratorFunction,
+  asyncFn: (...data: any) => Promise<any>,
   mutateKeys: Key[] = [],
 ): IUseActionReturn => {
   const [state, dispatch] = React.useReducer(
@@ -140,8 +142,7 @@ export const useAction = (
 
       dispatch({ key: 'actionAfter', value: { data: res } });
       return { data: res, error: false };
-    } catch (err) {
-      const error = err || true;
+    } catch (error) {
       dispatch({ key: 'actionAfter', value: { error } });
       return { data: null, error };
     }
@@ -152,8 +153,30 @@ export const useAction = (
     isLoading: state.status === 'loading',
     isError: state.status === 'error',
     isSuccess: state.status === 'success',
+    data: state.data,
+    error: state.error,
     action,
   };
+};
+
+export const useActionAPI = (table: string, mutateKeys: Key[] = []) => {
+  const [methodState, setMethodState] = React.useState<TMethod | null>(null);
+
+  const { action: originAction, ...originStates } = useAction(
+    async (method: TMethod, data: any, id?: number) => {
+      const url = `/${table}${id === undefined ? '' : `/${id}`}`;
+      const res = await instanceAxios[method](url, data);
+      return res;
+    },
+    mutateKeys,
+  );
+
+  const action = async (method: TMethod, data: any, id?: number) => {
+    setMethodState(method);
+    return await originAction(method, data, id);
+  };
+
+  return { ...originStates, method: methodState, action };
 };
 
 export default instanceAxios;
