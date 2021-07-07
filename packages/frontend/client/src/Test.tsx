@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactPlayer from 'react-player';
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -55,6 +56,12 @@ export const Test = () => {
       <Radio name="radio" options={options} helperText="한개이상 선택" />
 
       <button>submit</button>
+
+      <ReactPlayer
+        controls={true}
+        playsinline={true}
+        url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
+      />
     </Form>
   );
 };
