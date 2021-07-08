@@ -1,6 +1,6 @@
 import React from 'react';
 
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import escapeStringRegexp from 'escape-string-regexp';
 import useSWR, { Key, mutate } from 'swr';
 
@@ -52,16 +52,6 @@ instanceAxios.interceptors.request.use(
     return config;
   },
   error => Promise.reject(error),
-);
-
-/*
- * axios 응답 전 인터셉터
- */
-instanceAxios.interceptors.response.use(
-  response => {
-    return response.data;
-  },
-  error => Promise.reject(error.response),
 );
 
 /*
@@ -166,7 +156,7 @@ export const useActionAPI = (table: string, mutateKeys: Key[] = []) => {
     async (method: TMethod, data: any, id?: number) => {
       const url = `/${table}${id === undefined ? '' : `/${id}`}`;
       const res = await instanceAxios[method](url, data);
-      return res;
+      return res.data;
     },
     mutateKeys,
   );
