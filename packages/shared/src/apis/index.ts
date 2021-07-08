@@ -4,14 +4,14 @@ import axios from 'axios';
 import escapeStringRegexp from 'escape-string-regexp';
 import useSWR, { Key, mutate } from 'swr';
 
-import { dev, pro } from '@web/shared/src/config';
+import { dev, pro } from '@web/shared/config';
 import {
   IAction,
   IActionState,
   IUseActionReturn,
   IUseGetReturn,
   TMethod,
-} from '@web/shared/src/types/apis/index';
+} from '@web/shared/types/apis/index';
 
 const isDev: boolean = process.env.NODE_ENV === 'development';
 export const API_HOST_DEV: string = dev.api.host || window.location.host;

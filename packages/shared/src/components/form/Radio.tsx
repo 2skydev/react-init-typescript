@@ -1,9 +1,9 @@
-import { FormField } from '@web/shared/src/components/form/Form';
-
 import { useContext } from 'react';
 
 import { Radio as AntRadio } from 'antd';
 import { FormikContext } from 'formik';
+
+import { FormField } from '@web/shared/components/form/Form';
 
 interface RadioTypes {
   name: string;
@@ -19,6 +19,7 @@ export default function Radio({
   options,
 }: RadioTypes) {
   const formik = useContext(FormikContext);
+  const error = formik.errors[name];
 
   const onChange = (e: any) => {
     formik.setFieldValue(name, e.target.value);
@@ -27,8 +28,7 @@ export default function Radio({
   return (
     <FormField
       label={label}
-      error={formik.errors[name] as string | undefined}
-      text={helperText}
+      error={error ? helperText || (error as string) : ''}
     >
       <AntRadio.Group
         name={name}
