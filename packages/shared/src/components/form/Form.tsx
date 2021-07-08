@@ -2,11 +2,11 @@ import { ReactNode } from 'react';
 
 import { FormikProps, FormikProvider } from 'formik';
 
-export { default as Input } from '@web/shared/src/components/form/Input';
-export { default as Select } from '@web/shared/src/components/form/Select';
-export { default as CheckBox } from '@web/shared/src/components/form/CheckBox';
-export { default as Radio } from '@web/shared/src/components/form/Radio';
-export { default as FormField } from '@web/shared/src/components/form/FormField';
+export { default as Input } from '@web/shared/components/form/Input';
+export { default as Select } from '@web/shared/components/form/Select';
+export { default as CheckBox } from '@web/shared/components/form/CheckBox';
+export { default as Radio } from '@web/shared/components/form/Radio';
+export { default as FormField } from '@web/shared/components/form/FormField';
 
 interface Type {
   formik: FormikProps<any>;

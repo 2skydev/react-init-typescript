@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useActionAPI, useGet } from '@web/shared/src/apis';
+import { useActionAPI, useGet } from '@web/shared/apis';
 
 export default function Abc() {
   const { data = [] } = useGet('/posts');

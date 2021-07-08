@@ -1,9 +1,9 @@
-import { FormField } from '@web/shared/src/components/form/Form';
-
 import { useContext } from 'react';
 
 import { Checkbox } from 'antd';
 import { FormikContext } from 'formik';
+
+import { FormField } from '@web/shared/components/form/Form';
 
 interface CheckBoxTypes {
   name: string;

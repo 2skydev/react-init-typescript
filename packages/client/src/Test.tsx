@@ -4,14 +4,15 @@ import ReactPlayer from 'react-player';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-import SampleVideo from '@web/client/src/assets/video.mp4';
 import {
   Form,
   Input,
   Select,
   CheckBox,
   Radio,
-} from '@web/shared/src/components/form/Form';
+} from '@web/shared/components/form/Form';
+
+import SampleVideo from '@web/client/src/assets/video.mp4';
 
 export const Test = () => {
   const [playing, setPlaying] = useState(false);

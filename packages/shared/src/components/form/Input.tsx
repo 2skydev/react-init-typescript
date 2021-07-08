@@ -1,9 +1,9 @@
-import { FormField } from '@web/shared/src/components/form/Form';
-
 import React, { useContext } from 'react';
 
 import { Input as AntInput, InputProps } from 'antd';
 import { FormikContext } from 'formik';
+
+import { FormField } from '@web/shared/components/form/Form';
 
 interface InputTypes extends InputProps {
   name: string;

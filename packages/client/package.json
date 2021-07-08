@@ -8,6 +8,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.7",
+    "@web/shared": "0.0.0",
     "antd": "^4.16.6",
     "axios": "^0.21.1",
     "clsx": "^1.1.1",
