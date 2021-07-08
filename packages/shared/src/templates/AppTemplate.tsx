@@ -1,9 +1,10 @@
-export type TName = 'APP';
+import React from 'react';
 
-export interface IProps {
+interface IProps {
   hello: string;
+  children?: React.ReactNode;
 }
 
-export default function AppTemplate({ hello }: IProps) {
-  return <>hello wroldd!!</>;
+export default function AppTemplate({ hello, children }: IProps) {
+  return <>{children}</>;
 }
