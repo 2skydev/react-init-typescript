@@ -1,4 +1,8 @@
+import SampleImage from 'client/src/assets/sample.png';
+import SampleVideo from 'client/src/assets/video.mp4';
+
 import React from 'react';
+import { useState } from 'react';
 import ReactPlayer from 'react-player';
 
 import { useFormik } from 'formik';
@@ -13,6 +17,7 @@ import {
 } from 'shared/components/form/Form';
 
 export const Test = () => {
+  const [playing, setPlaying] = useState(false);
   const formik = useFormik({
     initialValues: {
       email: '123',
@@ -45,23 +50,49 @@ export const Test = () => {
   ];
 
   return (
-    <Form formik={formik}>
-      <Input
-        label="아이디"
-        name="email"
-        helperText="아이디는 숫자 형식으로 입력해주세요"
-      />
-      <Select name="select" options={options} helperText="선택해주세요" />
-      <CheckBox name="checkbox" options={options} helperText="한개이상 선택" />
-      <Radio name="radio" options={options} helperText="한개이상 선택" />
+    <div>
+      <Form formik={formik}>
+        <Input
+          label="아이디"
+          name="email"
+          helperText="아이디는 숫자 형식으로 입력해주세요"
+        />
+        <Select name="select" options={options} helperText="선택해주세요" />
+        <CheckBox
+          name="checkbox"
+          options={options}
+          helperText="한개이상 선택"
+        />
+        <Radio name="radio" options={options} helperText="한개이상 선택" />
 
-      <button>submit</button>
+        <button>submit</button>
+      </Form>
 
-      <ReactPlayer
-        controls={true}
-        playsinline={true}
-        url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
-      />
-    </Form>
+      <div className="videoBox">
+        <div className="video">
+          <ReactPlayer
+            playsinline={true}
+            url={SampleVideo}
+            onPlay={() => {
+              console.log('play');
+            }}
+            onPause={() => {
+              console.log('pause');
+            }}
+            onEnded={() => {
+              console.log('end');
+            }}
+            onSeek={() => {
+              console.log('error');
+              alert('잘못된 방식 영상 재시청');
+            }}
+            playing={playing}
+          />
+        </div>
+
+        <button onClick={() => setPlaying(true)}>PLAY</button>
+        <button onClick={() => setPlaying(false)}>PAUSE</button>
+      </div>
+    </div>
   );
 };
