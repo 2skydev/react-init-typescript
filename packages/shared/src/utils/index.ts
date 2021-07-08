@@ -18,3 +18,12 @@ export const arrayRemoveIndex = (arr: any[], index: number) => {
 
   return clone;
 };
+
+/*
+ * 테스트용 비동기
+ * - ms: millisecond
+ */
+export const delay = (ms = 1000) =>
+  new Promise(res => {
+    setTimeout(res, ms);
+  });
