@@ -10,6 +10,8 @@ import {
   Select,
   CheckBox,
   Radio,
+  DatePicker,
+  RangePicker,
 } from '@web/shared/components/form/Form';
 
 import SampleVideo from '@web/client/src/assets/video.mp4';
@@ -18,10 +20,12 @@ export const Test = () => {
   const [playing, setPlaying] = useState(false);
   const formik = useFormik({
     initialValues: {
-      email: '123',
+      email: '',
       select: 'test1',
       checkbox: 'test1',
       radio: 'test2',
+      date: '',
+      term: [],
     },
     onSubmit: values => {
       alert(JSON.stringify(values));
@@ -32,7 +36,9 @@ export const Test = () => {
         .typeError('테스트')
         .required('아이디는 숫자만 입력 가능'),
       select: yup.string().required(),
-      checkbox: yup.array().min(2, '2개이상 선택'),
+      checkbox: yup.array().min(1, '2개이상 선택'),
+      date: yup.string().typeError('타입에러').required('날짜 선택'),
+      term: yup.array().min(2, '기간 선택 에러').required(),
     }),
   });
 
@@ -62,6 +68,8 @@ export const Test = () => {
           helperText="한개이상 선택"
         />
         <Radio name="radio" options={options} helperText="한개이상 선택" />
+        <DatePicker name="date" />
+        <RangePicker name="term" />
 
         <button>submit</button>
       </Form>

@@ -1,18 +1,16 @@
-import { ReactChild } from 'react';
+import { ReactChild, useContext } from 'react';
+
+import { FormikContext } from 'formik';
 
 interface FormFieldTypes {
   label: string | undefined;
   children: ReactChild;
-  text: string | undefined;
-  error: string | undefined;
+  error: string;
 }
 
-export default function FormField({
-  label,
-  children,
-  text,
-  error,
-}: FormFieldTypes) {
+export default function FormField({ label, children, error }: FormFieldTypes) {
+  const formik = useContext(FormikContext);
+
   return (
     <div>
       {label && <div>{label}</div>}
@@ -20,7 +18,7 @@ export default function FormField({
       {children}
 
       <div className="helperText" style={{ color: 'red' }}>
-        {error && (text || error)}
+        {Object.values(formik.touched).length ? error : ''}
       </div>
     </div>
   );

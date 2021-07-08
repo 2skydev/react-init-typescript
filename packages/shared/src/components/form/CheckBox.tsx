@@ -19,6 +19,7 @@ export default function CheckBox({
   options,
 }: CheckBoxTypes) {
   const formik = useContext(FormikContext);
+  const error = formik.errors[name];
 
   const onChange = (values: Array<string | number | boolean>) => {
     formik.setFieldValue(name, values);
@@ -27,8 +28,7 @@ export default function CheckBox({
   return (
     <FormField
       label={label}
-      error={formik.errors[name] as string | undefined}
-      text={helperText}
+      error={error ? helperText || (error as string) : ''}
     >
       <Checkbox.Group
         options={options}
