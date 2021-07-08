@@ -3,5 +3,7 @@
   "version": "0.0.1",
   "npmClient": "yarn",
   "useWorkspaces": true,
-  "packages": ["packages/*", "packages/frontend/*"]
+  "packages": [
+    "packages/*"
+  ]
 }

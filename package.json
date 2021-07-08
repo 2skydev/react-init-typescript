@@ -2,8 +2,7 @@
   "name": "root",
   "private": true,
   "workspaces": [
-    "packages/*",
-    "packages/frontend/*"
+    "packages/*"
   ],
   "devDependencies": {
     "@types/node": "^15.12.5",
@@ -23,11 +22,11 @@
     "typescript": "^4.3.5"
   },
   "scripts": {
-    "start": "lerna run develop --stream --scope admin --scope client",
-    "start:client": "lerna run develop --stream --scope client",
-    "start:admin": "lerna run develop --stream --scope admin",
-    "start:backend": "lerna run develop --stream --scope backend",
-    "start:all": "lerna run develop --stream --scope admin --scope client --scope backend",
+    "start": "lerna run develop --stream --scope @web/admin --scope @web/client",
+    "start:client": "lerna run develop --stream --scope @web/client",
+    "start:admin": "lerna run develop --stream --scope @web/admin",
+    "start:strapi": "lerna run develop --stream --scope @web/strapi",
+    "start:all": "lerna run develop --stream --scope @web/admin --scope @web/client --scope @web/strapi",
     "kill-port": "npx kill-port --port 3000,3001,1337"
   }
 }

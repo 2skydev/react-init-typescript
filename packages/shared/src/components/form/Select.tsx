@@ -1,9 +1,9 @@
+import { FormField } from '@web/shared/src/components/form/Form';
+
 import React, { useContext } from 'react';
 
 import { Select as AntSelect } from 'antd';
 import { FormikContext } from 'formik';
-
-import { FormField } from 'shared/components/form/Form';
 
 interface OptionType {
   label: string;

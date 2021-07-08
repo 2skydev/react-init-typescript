@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useActionAPI, useGet } from 'shared/apis';
+import { useActionAPI, useGet } from '@web/shared/src/apis';
 
 export default function Abc() {
   const { data = [] } = useGet('/posts');
@@ -29,7 +29,7 @@ export default function Abc() {
       <br />
       {data
         .reverse()
-        .map((item: object) => JSON.stringify(item, null, 2) + '\n\n\n')}
+        .map((item: any) => JSON.stringify(item, null, 2) + '\n\n\n')}
     </pre>
   );
 }

@@ -1,17 +1,17 @@
-import React from 'react';
-
-import axios from 'axios';
-import escapeStringRegexp from 'escape-string-regexp';
-import useSWR, { Key, mutate } from 'swr';
-
-import { dev, pro } from 'shared/config';
+import { dev, pro } from '@web/shared/src/config';
 import {
   IAction,
   IActionState,
   IUseActionReturn,
   IUseGetReturn,
   TMethod,
-} from 'shared/types/apis/index';
+} from '@web/shared/src/types/apis/index';
+
+import React from 'react';
+
+import axios from 'axios';
+import escapeStringRegexp from 'escape-string-regexp';
+import useSWR, { Key, mutate } from 'swr';
 
 const isDev: boolean = process.env.NODE_ENV === 'development';
 export const API_HOST_DEV: string = dev.api.host || window.location.host;
