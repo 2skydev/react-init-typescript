@@ -2,11 +2,11 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { SWRConfig } from 'swr';
 
-import axios from '@web/shared/apis';
+import instanceAxios from '@web/shared/apis';
 import MiddlewareRoute from '@web/shared/components/route/MiddlewareRoute';
 import MiddlewareSwitch from '@web/shared/components/route/MiddlewareSwitch';
 
-import Abc from './Abc';
+import { SignIn } from './SignIn';
 import { Test } from './Test';
 
 import 'antd/dist/antd.css';
@@ -16,15 +16,16 @@ function App() {
     <SWRConfig
       value={{
         revalidateOnFocus: false,
-        fetcher: url => axios.get(url),
+        fetcher: async url => (await instanceAxios.get(url)).data,
       }}
     >
+      <SignIn />
+
       <BrowserRouter>
         <MiddlewareSwitch></MiddlewareSwitch>
         <MiddlewareRoute></MiddlewareRoute>
       </BrowserRouter>
 
-      <Abc />
       <Test />
     </SWRConfig>
   );
