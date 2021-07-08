@@ -1,28 +1,27 @@
 import { useContext } from 'react';
 
-import { Checkbox } from 'antd';
+import { DatePicker as AntDate } from 'antd';
 import { FormikContext } from 'formik';
 
 import { FormField } from 'shared/components/form/Form';
 
-interface CheckBoxTypes {
+interface DatePickerTypes {
   name: string;
   label?: string;
   helperText?: string;
-  options: Array<any>;
+  type?: string;
 }
 
-export default function CheckBox({
+export default function DatePicker({
   name,
   label,
   helperText,
-  options,
-}: CheckBoxTypes) {
+}: DatePickerTypes) {
   const formik = useContext(FormikContext);
   const error = formik.errors[name];
 
-  const onChange = (values: Array<string | number | boolean>) => {
-    formik.setFieldValue(name, values);
+  const onChange = (date: any, dateString: string) => {
+    formik.setFieldValue(name, dateString);
   };
 
   return (
@@ -30,11 +29,7 @@ export default function CheckBox({
       label={label}
       error={error ? helperText || (error as string) : ''}
     >
-      <Checkbox.Group
-        options={options}
-        defaultValue={['Apple']}
-        onChange={onChange}
-      />
+      <AntDate onChange={onChange} defaultValue={formik.values[name]} />
     </FormField>
   );
 }

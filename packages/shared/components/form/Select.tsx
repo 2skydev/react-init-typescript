@@ -24,6 +24,7 @@ export default function Select({
   helperText,
 }: SelectTypes) {
   const formik = useContext(FormikContext);
+  const error = formik.errors[name];
 
   const onChange = (value: string) => {
     formik.setFieldValue(name, value);
@@ -32,8 +33,7 @@ export default function Select({
   return (
     <FormField
       label={label}
-      error={formik.errors[name] as string | undefined}
-      text={helperText}
+      error={error ? helperText || (error as string) : ''}
     >
       <AntSelect defaultValue={formik.values[name]} onChange={onChange}>
         <AntSelect.Option value="">선택</AntSelect.Option>

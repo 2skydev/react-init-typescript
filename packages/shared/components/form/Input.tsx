@@ -18,16 +18,15 @@ export default function Input({
   ...props
 }: InputTypes) {
   const formik = useContext(FormikContext);
+  const error = formik.errors[name];
 
   return (
     <FormField
       label={label}
-      error={formik.errors[name] as string | undefined}
-      text={helperText}
+      error={error ? helperText || (error as string) : ''}
     >
       <AntInput
-        name="email"
-        placeholder="Basic usage"
+        name={name}
         onChange={formik.handleChange}
         value={formik.values[name]}
         {...props}
