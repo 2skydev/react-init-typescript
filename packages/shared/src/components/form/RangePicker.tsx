@@ -3,25 +3,28 @@ import { useContext } from 'react';
 import { DatePicker as AntDate } from 'antd';
 import { FormikContext } from 'formik';
 
-import { FormField } from 'shared/components/form/Form';
+import { FormField } from '@web/shared/components/form/Form';
 
-interface DatePickerTypes {
+interface RangePickerTypes {
   name: string;
   label?: string;
   helperText?: string;
   type?: string;
 }
 
-export default function DatePicker({
+export default function RangePicker({
   name,
   label,
   helperText,
-}: DatePickerTypes) {
+}: RangePickerTypes) {
   const formik = useContext(FormikContext);
   const error = formik.errors[name];
 
-  const onChange = (date: any, dateString: string) => {
-    formik.setFieldValue(name, dateString);
+  const onChange = (date: any, dateString: Array<string>) => {
+    formik.setFieldValue(
+      name,
+      dateString.filter(v => v),
+    );
   };
 
   return (
@@ -29,7 +32,10 @@ export default function DatePicker({
       label={label}
       error={error ? helperText || (error as string) : ''}
     >
-      <AntDate onChange={onChange} defaultValue={formik.values[name]} />
+      <AntDate.RangePicker
+        onChange={onChange}
+        defaultValue={formik.values[name]}
+      />
     </FormField>
   );
 }
