@@ -1,17 +1,15 @@
 {
-  "prettier.configPath": ".prettierrc",
-  "editor.defaultFormatter": "svipas.prettier-plus",
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-  "eslint.format.enable": true,
-  "eslint.packageManager": "yarn",
-  "prettier.eslintIntegration": true,
-  "prettier.stylelintIntegration": true,
-  "prettier.tslintIntegration": true,
-  "eslint.runtime": "yarn",
-  "eslint.run": "onSave",
-  "typescript.suggest.includeCompletionsForImportStatements": false,
-  "typescript.preferences.importModuleSpecifier": "shortest"
-}
+    "prettier.configPath": ".prettierrc",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "eslint.format.enable": true,
+    "eslint.packageManager": "yarn",
+    "prettier.eslintIntegration": true,
+    "prettier.stylelintIntegration": true,
+    "prettier.tslintIntegration": true,
+    "eslint.run": "onSave",
+    "typescript.suggest.includeCompletionsForImportStatements": false,
+    "typescript.preferences.importModuleSpecifier": "shortest"
+  }
