@@ -1,20 +1,17 @@
-import SampleImage from 'client/src/assets/sample.png';
-import SampleVideo from 'client/src/assets/video.mp4';
-
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
+import SampleVideo from '@web/client/src/assets/video.mp4';
 import {
   Form,
   Input,
   Select,
   CheckBox,
   Radio,
-} from 'shared/components/form/Form';
+} from '@web/shared/src/components/form/Form';
 
 export const Test = () => {
   const [playing, setPlaying] = useState(false);

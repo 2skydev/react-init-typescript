@@ -2,7 +2,11 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json",
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018
   },
   "plugins": [
     "@typescript-eslint",
@@ -11,7 +15,7 @@
   "ignorePatterns": [
     "dist/",
     "node_modules/",
-    "backend/",
+    "packages/strapi/",
     "config-overrides.js"
   ],
   "extends": [
@@ -28,6 +32,11 @@
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "react-hooks/rules-of-hooks": "off",
-    "react-hooks/exhaustive-deps": "off"
+    "react-hooks/exhaustive-deps": "off",
+    "react/react-in-jsx-scope": "off"
+  },
+  "env": {
+    "browser": false,
+    "es6": true
   }
 }

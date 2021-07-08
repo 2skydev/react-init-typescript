@@ -1,9 +1,9 @@
+import { FormField } from '@web/shared/src/components/form/Form';
+
 import { useContext } from 'react';
 
 import { Radio as AntRadio } from 'antd';
 import { FormikContext } from 'formik';
-
-import { FormField } from 'shared/components/form/Form';
 
 interface RadioTypes {
   name: string;
