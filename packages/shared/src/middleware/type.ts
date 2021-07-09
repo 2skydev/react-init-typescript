@@ -4,6 +4,7 @@ export interface IMiddlewareArguments {
 }
 
 export type TPromiseReturn = {
+  name: string;
   success: boolean;
   payload?: any;
 };

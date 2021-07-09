@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
 
-import middlewares from '@web/shared/middleware';
+import { History } from 'history';
+
 import { TTemplateKey } from '@web/shared/templates';
 
-import { TMiddlewareReturn } from '../middleware/type';
+import { TMiddlewareReturn, TPromiseReturn } from '../middleware/type';
 
 export interface IRoute {
   path: string;
   component: React.FC;
   template?: TTemplateKey;
   middleware?: TMiddlewareReturn[];
-  onMiddlewareSuccess: (payload: any) => void;
-  onMiddlewareError: (payload: any) => void;
+  onMiddlewareSuccess?: (
+    dispatch: Dispatch<any>,
+    history: History<unknown>,
+    payload: TPromiseReturn,
+  ) => void;
+  onMiddlewareError?: (
+    dispatch: Dispatch<any>,
+    history: History<unknown>,
+    payload: TPromiseReturn,
+  ) => void;
+}
+
+export interface IRouteProp extends IRoute {
+  dispatch: Dispatch<any>;
+  history: History<unknown>;
 }

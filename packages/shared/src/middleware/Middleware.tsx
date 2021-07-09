@@ -24,7 +24,7 @@ export default function Middleware({
         index: number,
         payload: TPromiseReturn,
       ): Promise<TPromiseReturn> {
-        if (middlewares.length < index - 1) {
+        if (!middlewares[index]) {
           return payload;
         }
         if (payload.success) {
@@ -36,11 +36,12 @@ export default function Middleware({
       }
 
       const result = await runMiddleware(middlewares, 0, {
+        name: 'start',
         success: true,
       });
       setSuccess(result.success);
 
-      if (result) {
+      if (result.success) {
         if (typeof onMiddlewareSuccess === 'function') {
           onMiddlewareSuccess(result);
         }

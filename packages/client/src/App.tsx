@@ -1,20 +1,21 @@
 import { useDispatch } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { SWRConfig } from 'swr';
 
 import instanceAxios from '@web/shared/apis';
-import MiddlewareRoute from '@web/shared/components/route/MiddlewareRoute';
-import MiddlewareSwitch from '@web/shared/components/route/MiddlewareSwitch';
+import URouteSwitch from '@web/shared/routes/URouteSwitch';
 
 import { SignIn } from './SignIn';
 import { Test } from './Test';
+import routes from './config/route';
 import { useRootSelector } from './hooks/useRootSelector';
 import { increase, decrease } from './stores/modules/test';
 
 import 'antd/dist/antd.css';
 
 function App() {
+  const history = useHistory();
   const dispatch = useDispatch();
   const count = useRootSelector(state => state.test.count);
 
@@ -41,11 +42,9 @@ function App() {
       >
         +
       </button>
-      <BrowserRouter>
-        <MiddlewareSwitch></MiddlewareSwitch>
-        <MiddlewareRoute></MiddlewareRoute>
-      </BrowserRouter>
       <Test />
+      <div>-------route--------</div>
+      <URouteSwitch routes={routes} dispatch={dispatch} history={history} />
     </SWRConfig>
   );
 }
