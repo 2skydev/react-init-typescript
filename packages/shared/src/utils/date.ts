@@ -8,7 +8,3 @@ import moment, { MomentInput } from 'moment';
 export const format = (momentInput: MomentInput, foramt = 'YYYY.MM.DD') => {
   return moment(momentInput).format(foramt);
 };
-
-// export const add = (momentInput: MomentInput, num: number, type = 'month') => {
-//   return format(moment(momentInput).add(num, type), 'YYYY.MM.DD');
-// };
