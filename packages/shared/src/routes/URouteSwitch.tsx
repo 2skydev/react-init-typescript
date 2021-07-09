@@ -1,5 +1,5 @@
 import React, { Dispatch } from 'react';
-import { Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import { History } from 'history';
 
@@ -37,17 +37,21 @@ export default React.memo(function URouteSwitch({
     <Switch>
       {Object.entries(templateGroupRoutes).map(([key, groupRoutes]) => {
         const TemplateComponent = templates[key as TTemplateKey];
+        const templatePaths = groupRoutes.map(route => route.path);
+
         return (
-          <TemplateComponent key={key}>
-            {groupRoutes.map(route => (
-              <URoute
-                key={route.path}
-                {...route}
-                dispatch={dispatch}
-                history={history}
-              />
-            ))}
-          </TemplateComponent>
+          <Route key={key} path={templatePaths}>
+            <TemplateComponent>
+              {groupRoutes.map(route => (
+                <URoute
+                  key={route.path}
+                  {...route}
+                  dispatch={dispatch}
+                  history={history}
+                />
+              ))}
+            </TemplateComponent>
+          </Route>
         );
       })}
     </Switch>
