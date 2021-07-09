@@ -2,6 +2,7 @@ import React from 'react';
 
 import axios from 'axios';
 import escapeStringRegexp from 'escape-string-regexp';
+import qs from 'qs';
 import useSWR, { Key, mutate, SWRConfiguration } from 'swr';
 
 import { dev, pro } from '@web/shared/config';
@@ -11,7 +12,9 @@ import {
   IUseActionReturn,
   IUseGetReturn,
   TMethod,
+  IUseGetAPIOptions,
 } from '@web/shared/types/apis/index';
+import { TCollection } from '@web/shared/types/strapi/collection';
 
 const isDev: boolean = process.env.NODE_ENV === 'development';
 export const API_HOST_DEV: string = dev.api.host || window.location.host;
@@ -53,12 +56,15 @@ instanceAxios.interceptors.request.use(
   error => Promise.reject(error),
 );
 
+export const APIFetcher = async (url: string) =>
+  (await instanceAxios.get(url)).data;
+
 /*
  * useSWR 레퍼 함수
  */
 export const useGet = (
   key: Key,
-  fetcher?: any,
+  fetcher: any = APIFetcher,
   options?: SWRConfiguration,
 ): IUseGetReturn => {
   const {
@@ -66,7 +72,8 @@ export const useGet = (
     error,
     isValidating,
     mutate: reload,
-  } = useSWR(key, fetcher, options);
+  } = useSWR(key, fetcher || APIFetcher, options);
+
   const isLoading = data === undefined && isValidating;
 
   return {
@@ -76,6 +83,33 @@ export const useGet = (
     error,
     reload,
   };
+};
+
+/*
+ * useSWR 레퍼 함수 + Strapi 관련 함수
+ */
+export const useGetAPI = (
+  table: TCollection,
+  options: IUseGetAPIOptions = {},
+) => {
+  let url = `/${table}`;
+
+  if (options.id) {
+    url += `/${options.id}`;
+  } else if (options.count) {
+    url += `/count`;
+  }
+
+  if (options.qs) {
+    url += `?${qs.stringify(options.qs)}`;
+  }
+
+  const returnValue = useGet(url, undefined, options);
+
+  returnValue.data =
+    returnValue.data || (options.count ? undefined : options.id ? {} : []);
+
+  return returnValue;
 };
 
 const actionInitState: IActionState = {
@@ -157,7 +191,7 @@ export const useAction = (
   };
 };
 
-export const useActionAPI = (table: string, mutateKeys: Key[] = []) => {
+export const useActionAPI = (table: TCollection, mutateKeys: Key[] = []) => {
   const [methodState, setMethodState] = React.useState<TMethod | null>(null);
 
   const { action: originAction, ...originStates } = useAction(
