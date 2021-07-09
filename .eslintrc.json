@@ -8,24 +8,9 @@
     },
     "ecmaVersion": 2018
   },
-  "plugins": [
-    "@typescript-eslint",
-    "react-hooks"
-  ],
-  "ignorePatterns": [
-    "dist/",
-    "node_modules/",
-    "packages/strapi/",
-    "config-overrides.js"
-  ],
-  "extends": [
-    "react-app",
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
-  ],
+  "plugins": ["@typescript-eslint", "react-hooks"],
+  "ignorePatterns": ["dist/", "node_modules/", "packages/strapi/", "config-overrides.js"],
+  "extends": ["react-app", "eslint:recommended", "plugin:react/recommended", "plugin:@typescript-eslint/eslint-recommended", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended"],
   "rules": {
     "import/no-anonymous-default-export": "off",
     "@typescript-eslint/ban-ts-comment": "off",
@@ -33,7 +18,8 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "react-hooks/rules-of-hooks": "off",
     "react-hooks/exhaustive-deps": "off",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-unused-vars": ["error"]
   },
   "env": {
     "browser": false,

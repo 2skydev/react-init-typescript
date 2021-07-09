@@ -1,8 +1,10 @@
+import Admin from './AdminTemplate';
 import App from './AppTemplate';
 import Default from './DefaultTemplate';
 
 const templates = {
   App,
+  Admin,
   Default,
 };
 

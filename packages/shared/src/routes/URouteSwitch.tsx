@@ -4,6 +4,7 @@ import { Switch } from 'react-router-dom';
 import { History } from 'history';
 
 import { IRoute } from '.';
+import templates, { TTemplateKey } from '../templates';
 import URoute from './URoute';
 
 interface IProps {
@@ -12,17 +13,43 @@ interface IProps {
   history: History<unknown>;
 }
 
-export default function URouteSwitch({ routes, dispatch, history }: IProps) {
+export default React.memo(function URouteSwitch({
+  routes,
+  dispatch,
+  history,
+}: IProps) {
+  const templateGroupRoutes = routes.reduce(
+    (acc, route) => {
+      route.template = route.template || 'Default';
+      if (acc[route.template]) {
+        acc[route.template] = [...acc[route.template], route];
+      } else {
+        acc[route.template] = [route];
+      }
+      return acc;
+    },
+    {} as {
+      [key in TTemplateKey]: IRoute[];
+    },
+  );
+
   return (
     <Switch>
-      {routes.map(route => (
-        <URoute
-          key={route.path}
-          {...route}
-          dispatch={dispatch}
-          history={history}
-        />
-      ))}
+      {Object.entries(templateGroupRoutes).map(([key, groupRoutes]) => {
+        const TemplateComponent = templates[key as TTemplateKey];
+        return (
+          <TemplateComponent key={key}>
+            {groupRoutes.map(route => (
+              <URoute
+                key={route.path}
+                {...route}
+                dispatch={dispatch}
+                history={history}
+              />
+            ))}
+          </TemplateComponent>
+        );
+      })}
     </Switch>
   );
-}
+});
