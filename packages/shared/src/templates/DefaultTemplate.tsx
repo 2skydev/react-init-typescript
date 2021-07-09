@@ -4,6 +4,6 @@ interface IProps {
   children?: React.ReactNode;
 }
 
-export default function AppTemplate({ children }: IProps) {
+export default function DefaultTemplate({ children }: IProps) {
   return <>{children}</>;
 }
