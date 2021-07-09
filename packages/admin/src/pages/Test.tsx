@@ -1,9 +1,10 @@
 import { useHistory } from 'react-router-dom';
 
-export default function Home() {
+export default function Test() {
   const history = useHistory();
   return (
     <div>
+      test
       <button
         onClick={() => {
           history.push(`/test`);

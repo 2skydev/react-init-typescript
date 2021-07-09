@@ -9,14 +9,17 @@ import { Layout, Menu } from 'antd';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-interface IProps {
+export interface IAdminTemplateProps {
   children?: React.ReactNode;
+  menus?: string[];
+  logo?: string;
+  footer?: React.ReactNode;
 }
 
-export default function AdminTemplate({ children }: IProps) {
-  React.useEffect(() => {
-    console.log('aaa');
-  }, []);
+export default React.memo(function AdminTemplate({
+  children,
+  footer,
+}: IAdminTemplateProps) {
   return (
     <Layout>
       <Sider
@@ -58,10 +61,8 @@ export default function AdminTemplate({ children }: IProps) {
             {children}
           </div>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>
-          Ant Design ©2021 Created by
-        </Footer>
+        <Footer style={{ textAlign: 'center' }}>{footer}</Footer>
       </Layout>
     </Layout>
   );
-}
+});

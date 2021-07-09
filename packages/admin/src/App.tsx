@@ -7,6 +7,7 @@ import instanceAxios from '@web/shared/apis';
 import URouteSwitch from '@web/shared/routes/URouteSwitch';
 
 import routes from './config/route';
+import defaultTemplateProps from './config/template';
 
 import 'antd/dist/antd.css';
 
@@ -21,7 +22,12 @@ function App() {
         fetcher: async url => (await instanceAxios.get(url)).data,
       }}
     >
-      <URouteSwitch routes={routes} dispatch={dispatch} history={history} />
+      <URouteSwitch
+        routes={routes}
+        templateProps={defaultTemplateProps}
+        dispatch={dispatch}
+        history={history}
+      />
     </SWRConfig>
   );
 }
