@@ -1,22 +1,46 @@
+import React from 'react';
 import { Route } from 'react-router-dom';
 
 import { IRouteProp } from '.';
 import Middleware from '../middleware/Middleware';
 import { TPromiseReturn } from '../middleware/type';
-import templates from '../templates';
+import { ITemplateProps, TTemplateKey } from '../templates';
+
+function TemplateActionComponent({
+  children,
+  template,
+  templateProps,
+  onChangePage,
+}: {
+  children: React.ReactNode;
+  template?: TTemplateKey;
+  templateProps?: ITemplateProps;
+  onChangePage: (
+    template: TTemplateKey,
+    templateProps?: ITemplateProps,
+  ) => void;
+}) {
+  React.useEffect(() => {
+    if (template) {
+      onChangePage(template, templateProps);
+    }
+  }, []);
+
+  return <>{children}</>;
+}
 
 export default function URoute({
   path,
-  component: Component,
   template,
+  templateProps,
+  component: Component,
   middleware,
   onMiddlewareError,
   onMiddlewareSuccess,
   dispatch,
   history,
+  onChangePage,
 }: IRouteProp) {
-  const TemplateComponent = template ? templates[template] : templates.Default;
-
   const _onMiddlewareError = (payload: TPromiseReturn) => {
     onMiddlewareError && onMiddlewareError(dispatch, history, payload);
   };
@@ -26,20 +50,28 @@ export default function URoute({
 
   return (
     <Route exact path={path}>
-      {middleware ? (
+      {middleware && middleware.length ? (
         <Middleware
           middlewares={middleware}
           onMiddlewareError={_onMiddlewareError}
           onMiddlewareSuccess={_onMiddlewareSuccess}
         >
-          <TemplateComponent>
+          <TemplateActionComponent
+            template={template}
+            templateProps={templateProps}
+            onChangePage={onChangePage}
+          >
             <Component />
-          </TemplateComponent>
+          </TemplateActionComponent>
         </Middleware>
       ) : (
-        <TemplateComponent>
+        <TemplateActionComponent
+          template={template}
+          templateProps={templateProps}
+          onChangePage={onChangePage}
+        >
           <Component />
-        </TemplateComponent>
+        </TemplateActionComponent>
       )}
     </Route>
   );
