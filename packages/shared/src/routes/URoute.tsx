@@ -1,30 +1,37 @@
 import { Route } from 'react-router-dom';
 
-import { IRoute } from '.';
+import { IRouteProp } from '.';
 import Middleware from '../middleware/Middleware';
-import templates from '../templates';
+import { TPromiseReturn } from '../middleware/type';
 
 export default function URoute({
   path,
-  component,
-  template,
+  component: Component,
   middleware,
   onMiddlewareError,
   onMiddlewareSuccess,
-}: IRoute) {
-  const TemplateComponent = template ? templates[template] : templates.Default;
+  dispatch,
+  history,
+}: IRouteProp) {
+  const _onMiddlewareError = (payload: TPromiseReturn) => {
+    onMiddlewareError && onMiddlewareError(dispatch, history, payload);
+  };
+  const _onMiddlewareSuccess = (payload: TPromiseReturn) => {
+    onMiddlewareSuccess && onMiddlewareSuccess(dispatch, history, payload);
+  };
+
   return (
     <Route exact path={path}>
-      {middleware ? (
+      {middleware && middleware.length ? (
         <Middleware
           middlewares={middleware}
-          onMiddlewareError={onMiddlewareError}
-          onMiddlewareSuccess={onMiddlewareSuccess}
+          onMiddlewareError={_onMiddlewareError}
+          onMiddlewareSuccess={_onMiddlewareSuccess}
         >
-          <TemplateComponent>{component}</TemplateComponent>
+          <Component />
         </Middleware>
       ) : (
-        <TemplateComponent>{component}</TemplateComponent>
+        <Component />
       )}
     </Route>
   );

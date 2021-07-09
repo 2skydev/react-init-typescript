@@ -1,8 +1,8 @@
 import React from 'react';
 
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import escapeStringRegexp from 'escape-string-regexp';
-import useSWR, { Key, mutate } from 'swr';
+import useSWR, { Key, mutate, SWRConfiguration } from 'swr';
 
 import { dev, pro } from '@web/shared/config';
 import {
@@ -41,8 +41,7 @@ instanceAxios.interceptors.request.use(
       new RegExp(`^${escapeStringRegexp(API_HOST)}`).test(config.baseURL || '')
     ) {
       const token =
-        window.localStorage['user.token'] ||
-        window.sessionStorage['user.token'];
+        window.localStorage['token'] || window.sessionStorage['token'];
 
       if (token) {
         config.headers['Authorization'] = `Bearer ${token}`;
@@ -57,8 +56,17 @@ instanceAxios.interceptors.request.use(
 /*
  * useSWR 레퍼 함수
  */
-export const useGet = (key: Key): IUseGetReturn => {
-  const { data, error, isValidating, mutate: reload } = useSWR(key);
+export const useGet = (
+  key: Key,
+  fetcher?: any,
+  options?: SWRConfiguration,
+): IUseGetReturn => {
+  const {
+    data,
+    error,
+    isValidating,
+    mutate: reload,
+  } = useSWR(key, fetcher, options);
   const isLoading = data === undefined && isValidating;
 
   return {
