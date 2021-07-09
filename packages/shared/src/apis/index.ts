@@ -41,8 +41,7 @@ instanceAxios.interceptors.request.use(
       new RegExp(`^${escapeStringRegexp(API_HOST)}`).test(config.baseURL || '')
     ) {
       const token =
-        window.localStorage['user.token'] ||
-        window.sessionStorage['user.token'];
+        window.localStorage['token'] || window.sessionStorage['token'];
 
       if (token) {
         config.headers['Authorization'] = `Bearer ${token}`;
