@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import { SWRConfig } from 'swr';
 
-import instanceAxios from '@web/shared/apis';
+import { APIFetcher } from '@web/shared/apis';
 import URouteSwitch from '@web/shared/routes/URouteSwitch';
 
 import { SignIn } from './SignIn';
@@ -23,7 +23,7 @@ function App() {
     <SWRConfig
       value={{
         revalidateOnFocus: false,
-        fetcher: async url => (await instanceAxios.get(url)).data,
+        fetcher: APIFetcher,
       }}
     >
       <SignIn />

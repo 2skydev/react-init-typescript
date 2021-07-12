@@ -1,4 +1,7 @@
+import { SWRConfiguration } from 'swr';
 import { MutatorCallback } from 'swr/dist/types';
+
+import { IAnyObject } from '@web/shared/types/etc';
 
 // useGet types
 export interface IUseGetReturn {
@@ -10,6 +13,12 @@ export interface IUseGetReturn {
     data?: any | Promise<any> | MutatorCallback<any>,
     shouldRevalidate?: boolean,
   ) => Promise<any | undefined>;
+}
+
+export interface IUseGetAPIOptions extends SWRConfiguration {
+  id?: number;
+  count?: boolean;
+  qs?: IAnyObject;
 }
 
 // useAction types

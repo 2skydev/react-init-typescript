@@ -13,7 +13,7 @@ const config = {
     '../../node_modules/strapi-plugin-upload/models/'
   ],
   // components: './components/',
-  output: '../shared/types/strapi/',
+  output: '../shared/src/types/strapi/',
 
   /**
    * optional
