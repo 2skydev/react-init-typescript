@@ -1,6 +1,6 @@
 import { useSignIn, useSignUp } from '@web/shared/apis/users';
 import { IAnyObject } from '@web/shared/types/etc';
-import { createBody, getErrorMessage } from '@web/shared/utils/strapi';
+import { createBody } from '@web/shared/utils/strapi';
 
 export default function useAuth() {
   const { action: actionSignIn } = useSignIn();
@@ -24,23 +24,12 @@ export default function useAuth() {
   ) => {
     const res = await actionSignIn(identifier, password);
 
-    if (!res.error) {
-      window[isSession ? 'sessionStorage' : 'localStorage'].setItem(
-        'token',
-        res.data.jwt,
-      );
+    window[isSession ? 'sessionStorage' : 'localStorage'].setItem(
+      'token',
+      res.jwt,
+    );
 
-      return {
-        error: false,
-        data: res.data,
-      };
-    } else {
-      return {
-        error: true,
-        messageID: res.messageID,
-        message: getErrorMessage(res.messageID),
-      };
-    }
+    return res.data;
   };
 
   /*
@@ -56,22 +45,11 @@ export default function useAuth() {
   const signUp = async (data: IAnyObject, continueSignIn = false) => {
     const res = await actionSignUp(createBody(data));
 
-    if (!res.error) {
-      if (continueSignIn) {
-        await signIn(data.email, data.password);
-      }
-
-      return {
-        error: false,
-        data: res.data,
-      };
-    } else {
-      return {
-        error: true,
-        messageID: res.messageID,
-        message: getErrorMessage(res.messageID),
-      };
+    if (continueSignIn) {
+      await signIn(data.email, data.password);
     }
+
+    return res;
   };
 
   /*
@@ -80,18 +58,20 @@ export default function useAuth() {
   const signOut = async () => {
     window.localStorage.removeItem('token');
     window.sessionStorage.removeItem('token');
-
-    window.location.href = '/';
   };
 
-  /*
-   * 로그인 여부 확인
-   */
-  const isSignIn = () => {
-    return Boolean(
-      window.localStorage['token'] || window.sessionStorage['token'],
-    );
-  };
+  return {
+    signIn,
+    signUp,
+    signOut,
 
-  return { signIn, signUp, signOut, isSignIn };
+    /*
+     * 로그인 여부 확인
+     */
+    get isSignIn() {
+      return Boolean(
+        window.localStorage['token'] || window.sessionStorage['token'],
+      );
+    },
+  };
 }

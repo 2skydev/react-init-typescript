@@ -10,11 +10,9 @@ const routes: IRoute[] = [
     component: Home,
     middleware: [middlewares.authMiddleware],
     onMiddlewareSuccess: (dispatch, history, payload) => {
-      console.log('aaa');
       dispatch(increase(1000));
     },
     onMiddlewareError: (dispatch, history, payload) => {
-      console.log(history);
       history.replace('/ttest');
     },
   },

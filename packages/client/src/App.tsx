@@ -1,9 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { SWRConfig } from 'swr';
-
-import { APIFetcher } from '@web/shared/apis';
+import { APIContextProvider } from '@web/shared/apis/APIContext';
 import URouteSwitch from '@web/shared/routes/URouteSwitch';
 
 import { SignIn } from './SignIn';
@@ -20,12 +18,7 @@ function App() {
   const count = useRootSelector(state => state.test.count);
 
   return (
-    <SWRConfig
-      value={{
-        revalidateOnFocus: false,
-        fetcher: APIFetcher,
-      }}
-    >
+    <APIContextProvider>
       <SignIn />
       <button
         onClick={() => {
@@ -45,7 +38,7 @@ function App() {
       <Test />
       <div>-------route--------</div>
       <URouteSwitch routes={routes} dispatch={dispatch} history={history} />
-    </SWRConfig>
+    </APIContextProvider>
   );
 }
 

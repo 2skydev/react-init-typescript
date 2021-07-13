@@ -29,9 +29,7 @@ const Modal = ({
 
   const onSubmit = async () => {
     setConfirmLoading(true);
-    console.log('start');
     await submit();
-    console.log('end');
     setConfirmLoading(false);
     onClose();
   };

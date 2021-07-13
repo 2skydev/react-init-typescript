@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-import instanceAxios, { API_HOST } from '@web/shared/apis/index';
+import strapiAxios, { API_HOST } from '@web/shared/apis/index';
 import { Form, Input } from '@web/shared/components/form/Form';
 
 export const SignIn = () => {
@@ -22,7 +22,7 @@ export const SignIn = () => {
   });
 
   const signIn = async (identifier: string, password: string) => {
-    const res = await instanceAxios.post(`${API_HOST}/auth/local`, {
+    const res = await strapiAxios.post(`${API_HOST}/auth/local`, {
       identifier,
       password,
     });

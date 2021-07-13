@@ -5,8 +5,8 @@ import { Modal } from 'antd';
 
 interface ConfirmType {
   content: ReactNode;
-  onOk: () => any;
-  onCancel: () => void;
+  onOk?: () => any;
+  onCancel?: () => void;
   okText?: string;
   cancelText?: string;
 }
@@ -31,12 +31,14 @@ export default function UseConfirm() {
       cancelText,
       onOk: async e => {
         setLoading(true);
-        await onOk();
+        if (onOk) {
+          await onOk();
+        }
         setLoading(false);
       },
       onCancel: function () {
         setLoading(false);
-        onCancel();
+        onCancel && onCancel();
       },
       cancelButtonProps: {
         disabled: false,

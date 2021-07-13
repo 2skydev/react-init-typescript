@@ -1,10 +1,11 @@
 import React from 'react';
 
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import escapeStringRegexp from 'escape-string-regexp';
 import qs from 'qs';
 import useSWR, { Key, mutate, SWRConfiguration } from 'swr';
 
+import APIContext from '@web/shared/apis/APIContext';
 import { dev, pro } from '@web/shared/config';
 import {
   IAction,
@@ -30,7 +31,7 @@ export const API_PATH_PREFIX: string = isDev
 /*
  * axios 인스턴스 생성
  */
-const instanceAxios = axios.create({
+const strapiAxios = axios.create({
   baseURL: API_HOST + API_PATH_PREFIX,
   withCredentials: false,
 });
@@ -38,7 +39,7 @@ const instanceAxios = axios.create({
 /*
  * axios 요청 전 인터셉터
  */
-instanceAxios.interceptors.request.use(
+strapiAxios.interceptors.request.use(
   config => {
     if (
       new RegExp(`^${escapeStringRegexp(API_HOST)}`).test(config.baseURL || '')
@@ -56,8 +57,14 @@ instanceAxios.interceptors.request.use(
   error => Promise.reject(error),
 );
 
-export const APIFetcher = async (url: string) =>
-  (await instanceAxios.get(url)).data;
+export const APIFetcher = async (url: string) => {
+  try {
+    const res = await strapiAxios.get(url);
+    return res;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 
 /*
  * useSWR 레퍼 함수
@@ -157,6 +164,7 @@ export const useAction = (
   asyncFn: (...data: any) => Promise<any>,
   mutateKeys: Key[] = [],
 ): IUseActionReturn => {
+  const { onError } = React.useContext(APIContext);
   const [state, dispatch] = React.useReducer(
     actionStateReducer,
     actionInitState,
@@ -173,10 +181,12 @@ export const useAction = (
       }
 
       dispatch({ key: 'actionAfter', value: { data: res } });
-      return { data: res, error: false };
-    } catch (error) {
+      return res;
+    } catch (err) {
+      const error: AxiosResponse = err.response;
       dispatch({ key: 'actionAfter', value: { error } });
-      return { data: null, error };
+      onError && onError(error);
+      throw error;
     }
   };
 
@@ -197,7 +207,7 @@ export const useActionAPI = (table: TCollection, mutateKeys: Key[] = []) => {
   const { action: originAction, ...originStates } = useAction(
     async (method: TMethod, data: any, id?: number) => {
       const url = `/${table}${id === undefined ? '' : `/${id}`}`;
-      const res = await instanceAxios[method](url, data);
+      const res = await strapiAxios[method](url, data);
       return res.data;
     },
     mutateKeys,
@@ -211,4 +221,4 @@ export const useActionAPI = (table: TCollection, mutateKeys: Key[] = []) => {
   return { ...originStates, method: methodState, action };
 };
 
-export default instanceAxios;
+export default strapiAxios;

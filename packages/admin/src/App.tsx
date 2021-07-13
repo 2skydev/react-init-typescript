@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import { SWRConfig } from 'swr';
 
-import instanceAxios from '@web/shared/apis';
+import strapiAxios from '@web/shared/apis';
 import URouteSwitch from '@web/shared/routes/URouteSwitch';
 
 import routes from './config/route';
@@ -19,7 +19,7 @@ function App() {
     <SWRConfig
       value={{
         revalidateOnFocus: false,
-        fetcher: async url => (await instanceAxios.get(url)).data,
+        fetcher: async url => (await strapiAxios.get(url)).data,
       }}
     >
       <URouteSwitch

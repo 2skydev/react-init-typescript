@@ -79,17 +79,7 @@ export const Test = () => {
           <ReactPlayer
             playsinline={true}
             url={SampleVideo}
-            onPlay={() => {
-              console.log('play');
-            }}
-            onPause={() => {
-              console.log('pause');
-            }}
-            onEnded={() => {
-              console.log('end');
-            }}
             onSeek={() => {
-              console.log('error');
               alert('잘못된 방식 영상 재시청');
             }}
             playing={playing}
