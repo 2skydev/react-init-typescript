@@ -36,9 +36,10 @@ export default function Radio({
         onChange={onChange}
       >
         {options.map(v => (
-          <AntRadio key={v.value} value={v.value}>
-            {v.label}
-          </AntRadio>
+          <div key={v.value} style={v?.style ? v.style : {}}>
+            <AntRadio value={v.value}>{v.label}</AntRadio>
+            {v?.children && v.children}
+          </div>
         ))}
       </AntRadio.Group>
     </FormField>

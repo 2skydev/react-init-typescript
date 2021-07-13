@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import {
   UploadOutlined,
@@ -7,11 +8,14 @@ import {
 } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 
+import { IMenu } from '.';
+
+const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
 
 export interface IAdminTemplateProps {
   children?: React.ReactNode;
-  menus?: string[];
+  menus?: IMenu[];
   logo?: string;
   footer?: React.ReactNode;
 }
@@ -19,24 +23,40 @@ export interface IAdminTemplateProps {
 export default React.memo(function AdminTemplate({
   children,
   footer,
+  menus,
 }: IAdminTemplateProps) {
+  React.useEffect(() => {
+    console.log('aaa');
+  }, []);
   return (
     <Layout>
       <Sider breakpoint="lg" collapsedWidth="0">
         <div className="logo" />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
-          <Menu.Item key="1" icon={<UserOutlined />}>
-            nav 1
-          </Menu.Item>
-          <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-            nav 2
-          </Menu.Item>
-          <Menu.Item key="3" icon={<UploadOutlined />}>
-            nav 3
-          </Menu.Item>
-          <Menu.Item key="4" icon={<UserOutlined />}>
-            nav 4
-          </Menu.Item>
+          {menus &&
+            menus.map((menu, i) =>
+              menu.subMenu ? (
+                <SubMenu icon={menu.icon} title={menu.name} key={menu.name}>
+                  {menu.subMenu.map((subMenu, i) => (
+                    <Menu.Item icon={subMenu.icon} key={subMenu.name}>
+                      {subMenu.link ? (
+                        <Link to={subMenu.link}>{subMenu.name}</Link>
+                      ) : (
+                        subMenu.name
+                      )}
+                    </Menu.Item>
+                  ))}
+                </SubMenu>
+              ) : (
+                <Menu.Item icon={menu.icon} key={menu.name}>
+                  {menu.link ? (
+                    <Link to={menu.link}>{menu.name}</Link>
+                  ) : (
+                    menu.name
+                  )}
+                </Menu.Item>
+              ),
+            )}
         </Menu>
       </Sider>
       <Layout>
