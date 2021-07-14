@@ -1,6 +1,5 @@
-import { SWRConfiguration } from 'swr';
-
 import strapiAxios, { useAction, useGet, API_HOST } from '@web/shared/apis';
+import { IUseGetOptions } from '@web/shared/types/apis/index';
 
 // 소셜 로그인
 export const useProviderSignIn = () => {
@@ -37,7 +36,7 @@ export const useSignUp = () => {
 };
 
 // 로그인 한 회원정보 가져오기
-export const useGetMe = (options: SWRConfiguration) => {
+export const useGetMe = (options?: IUseGetOptions) => {
   return useGet(
     '/users/me',
     async () => {

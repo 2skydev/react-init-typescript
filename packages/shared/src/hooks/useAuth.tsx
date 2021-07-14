@@ -60,10 +60,17 @@ export default function useAuth() {
     window.sessionStorage.removeItem('token');
   };
 
+  const getToken = (): string | null => {
+    return (
+      window.localStorage['token'] || window.sessionStorage['token'] || null
+    );
+  };
+
   return {
     signIn,
     signUp,
     signOut,
+    getToken,
 
     /*
      * 로그인 여부 확인

@@ -2,7 +2,7 @@ import middlewares from '@web/shared/middleware';
 import { IRoute } from '@web/shared/routes';
 
 import Home from '~/pages/Home';
-import { increase } from '~/stores/modules/test';
+import { increase } from '~/redux/slices/test';
 
 const routes: IRoute[] = [
   {

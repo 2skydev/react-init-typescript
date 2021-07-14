@@ -3,10 +3,10 @@ import React from 'react';
 import axios, { AxiosResponse } from 'axios';
 import escapeStringRegexp from 'escape-string-regexp';
 import qs from 'qs';
-import useSWR, { Key, mutate, SWRConfiguration } from 'swr';
+import useSWR, { Key, mutate } from 'swr';
 
-import APIContext from '@web/shared/apis/APIContext';
 import { dev, pro } from '@web/shared/config';
+import APIContext from '@web/shared/contexts/APIContext';
 import {
   IAction,
   IActionState,
@@ -14,6 +14,7 @@ import {
   IUseGetReturn,
   TMethod,
   IUseGetAPIOptions,
+  IUseGetOptions,
 } from '@web/shared/types/apis/index';
 import { TCollection } from '@web/shared/types/strapi/collection';
 
@@ -72,14 +73,18 @@ export const APIFetcher = async (url: string) => {
 export const useGet = (
   key: Key,
   fetcher: any = APIFetcher,
-  options?: SWRConfiguration,
+  options: IUseGetOptions = {},
 ): IUseGetReturn => {
   const {
     data,
     error,
     isValidating,
     mutate: reload,
-  } = useSWR(key, fetcher || APIFetcher, options);
+  } = useSWR(
+    options.enabled === true ? key : null,
+    fetcher || APIFetcher,
+    options,
+  );
 
   const isLoading = data === undefined && isValidating;
 
