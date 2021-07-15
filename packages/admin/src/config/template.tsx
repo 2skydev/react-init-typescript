@@ -11,7 +11,7 @@ export const adminTemplateProps: IAdminTemplateProps = {
       subMenu: [
         {
           name: '메뉴 1-1',
-          link: '/test',
+          link: '/',
         },
         {
           name: '메뉴 1-2',
@@ -25,7 +25,7 @@ export const adminTemplateProps: IAdminTemplateProps = {
       subMenu: [
         {
           name: '메뉴 2-1',
-          link: '/test',
+          link: '/',
         },
         {
           name: '메뉴 2-2',
