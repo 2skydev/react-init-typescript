@@ -1,3 +1,4 @@
+import { Button, Space } from 'antd';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
@@ -38,21 +39,28 @@ export default function TestSignIn() {
     <div>
       {isSignIn && (
         <pre>
-          로그인한 정보 (redux: state.shared.auth.user)
+          sign info (redux: state.shared.auth.user)
           <br />
           {JSON.stringify(user, null, 2)}
         </pre>
       )}
 
-      {isSignIn && <button onClick={_signOut}>로그아웃</button>}
+      {isSignIn && (
+        <Button type="primary" danger onClick={_signOut}>
+          sign out
+        </Button>
+      )}
 
       {!isSignIn && (
         <Form formik={formik}>
-          <Input label="아이디" name="email" />
+          <Space direction="vertical" size="middle">
+            <Input label="id" name="email" />
+            <Input type="password" label="password" name="password" />
 
-          <Input type="password" label="비밀번호" name="password" />
-
-          <button>로그인</button>
+            <Button type="primary" htmlType="submit" color="primary" block>
+              sign in
+            </Button>
+          </Space>
         </Form>
       )}
     </div>

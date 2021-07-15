@@ -1,5 +1,7 @@
 import { useDispatch } from 'react-redux';
 
+import { Button, Space, Tag } from 'antd';
+
 import { useRootSelector } from '~/hooks/useRootSelector';
 import { increase, decrease } from '~/redux/slices/test';
 
@@ -8,24 +10,26 @@ export default function TestReduxCount() {
   const count = useRootSelector(state => state.test.count);
 
   return (
-    <>
-      <button
+    <Space>
+      <Button
         onClick={() => {
           dispatch(decrease(100));
         }}
       >
         -
-      </button>
+      </Button>
 
-      <span>{count}</span>
+      <Tag color="blue" style={{ marginRight: 0 }}>
+        {count}
+      </Tag>
 
-      <button
+      <Button
         onClick={() => {
           dispatch(increase(100));
         }}
       >
         +
-      </button>
-    </>
+      </Button>
+    </Space>
   );
 }
