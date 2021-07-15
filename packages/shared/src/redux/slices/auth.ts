@@ -1,22 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { IUser } from '@web/shared/types/strapi/user';
+
 interface IAuthState {
-  count: number;
+  user: IUser | null;
 }
 
 const initialState: IAuthState = {
-  count: 0,
+  user: null,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    increase(state, action: PayloadAction<number>) {
-      state.count += action.payload || 1;
+    setUser(state, action: PayloadAction<IUser>) {
+      state.user = action.payload;
     },
   },
 });
 
-export const { increase } = authSlice.actions;
+export const { setUser } = authSlice.actions;
 export default authSlice.reducer;

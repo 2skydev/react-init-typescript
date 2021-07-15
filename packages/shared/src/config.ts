@@ -10,7 +10,7 @@ interface ConfigRoot {
 // 프로덕션 환경 설정
 export const pro: ConfigRoot = {
   api: {
-    host: null,
+    host: 'http://192.168.0.64:1337',
     prefix: '',
   },
 };

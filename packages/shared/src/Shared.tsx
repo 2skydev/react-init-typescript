@@ -6,16 +6,22 @@ import { SWRConfig, SWRConfiguration } from 'swr';
 
 import { APIFetcher } from '@web/shared/apis';
 import Bootstrap from '@web/shared/components/bootstrap/Bootstrap';
-import { Provider } from '@web/shared/contexts/APIContext';
+import { Provider } from '@web/shared/contexts/SharedContext';
 import useStrapiErrorAlert from '@web/shared/hooks/useStrapiErrorAlert';
 
 interface IProps {
+  store: any;
   swrConfig?: SWRConfiguration;
   onError?: (error: AxiosResponse) => void;
   children: ReactNode;
 }
 
-export default function Shared({ swrConfig, onError, children }: IProps) {
+export default function Shared({
+  store,
+  swrConfig,
+  onError,
+  children,
+}: IProps) {
   const { handleErrorAlert } = useStrapiErrorAlert();
 
   const handleOnError = onError || handleErrorAlert;
@@ -23,6 +29,7 @@ export default function Shared({ swrConfig, onError, children }: IProps) {
   return (
     <Provider
       value={{
+        store,
         onError: handleOnError,
       }}
     >

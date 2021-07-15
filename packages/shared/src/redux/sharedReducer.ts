@@ -8,7 +8,7 @@ const sharedReducer = combineReducers({
 });
 
 // state 타입 반환
-export type RootState = ReturnType<typeof sharedReducer>;
+export type SharedState = ReturnType<typeof sharedReducer>;
 
 // sharedReducer 반환
 export default sharedReducer;

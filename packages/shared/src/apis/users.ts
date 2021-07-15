@@ -1,6 +1,8 @@
 import strapiAxios, { useAction, useGet, API_HOST } from '@web/shared/apis';
 import { IUseGetOptions } from '@web/shared/types/apis/index';
 
+import { delay } from './../utils/index';
+
 // 소셜 로그인
 export const useProviderSignIn = () => {
   return useAction(async (provider, access_token) => {
@@ -40,6 +42,8 @@ export const useGetMe = (options?: IUseGetOptions) => {
   return useGet(
     '/users/me',
     async () => {
+      // 테스트를 위한 코드 (실제 개발시 지워주세요)
+      await delay(1000);
       const res = await strapiAxios.get(`${API_HOST}/users/me`);
       return res.data;
     },

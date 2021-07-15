@@ -1,3 +1,9 @@
+import Test from '~/components/test/Test';
+
 export default function Home() {
-  return <div>hello world!!!!</div>;
+  return (
+    <div>
+      <Test />
+    </div>
+  );
 }

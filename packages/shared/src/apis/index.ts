@@ -6,7 +6,7 @@ import qs from 'qs';
 import useSWR, { Key, mutate } from 'swr';
 
 import { dev, pro } from '@web/shared/config';
-import APIContext from '@web/shared/contexts/APIContext';
+import sharedContext from '@web/shared/contexts/SharedContext';
 import {
   IAction,
   IActionState,
@@ -169,7 +169,7 @@ export const useAction = (
   asyncFn: (...data: any) => Promise<any>,
   mutateKeys: Key[] = [],
 ): IUseActionReturn => {
-  const { onError } = React.useContext(APIContext);
+  const { onError } = React.useContext(sharedContext);
   const [state, dispatch] = React.useReducer(
     actionStateReducer,
     actionInitState,

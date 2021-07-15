@@ -27,6 +27,9 @@
     "start:admin": "lerna run develop --stream --scope @web/admin",
     "start:strapi": "lerna run develop --stream --scope @web/strapi",
     "start:all": "lerna run develop --stream --scope @web/admin --scope @web/client --scope @web/strapi",
+    "build": "lerna run build --stream --scope @web/admin --scope @web/client",
+    "build:client": "lerna run build --stream --scope @web/client",
+    "build:admin": "lerna run build --stream --scope @web/admin",
     "kill-port": "npx kill-port --port 3000,3001,1337"
   }
 }

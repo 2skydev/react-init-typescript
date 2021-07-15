@@ -1,11 +1,11 @@
-import { delay } from '../utils';
+// import { delay } from '../utils';
 import { TPromiseReturn } from './type';
 
 export default async function authMiddleware(
   payload: TPromiseReturn,
 ): Promise<TPromiseReturn> {
   try {
-    await delay(2000);
+    // await delay(1000);
     return {
       name: 'authMiddleware',
       success: true,
