@@ -1,20 +1,17 @@
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 
-import { createStore } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import Shared from '@web/shared/Shared';
+
+import store from '~/redux/store';
 
 import App from './App';
-import rootReducer from './stores/modules';
-
-const store = createStore(rootReducer, composeWithDevTools());
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Provider store={store}>
+  <Provider store={store}>
+    <Shared>
       <App />
-    </Provider>
-  </BrowserRouter>,
+    </Shared>
+  </Provider>,
   document.getElementById('root'),
 );

@@ -15,7 +15,11 @@ export interface IUseGetReturn {
   ) => Promise<any | undefined>;
 }
 
-export interface IUseGetAPIOptions extends SWRConfiguration {
+export interface IUseGetOptions extends SWRConfiguration {
+  enabled?: boolean;
+}
+
+export interface IUseGetAPIOptions extends IUseGetOptions {
   id?: number;
   count?: boolean;
   qs?: IAnyObject;

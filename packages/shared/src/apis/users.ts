@@ -1,22 +1,14 @@
-import { SWRConfiguration } from 'swr';
-
-import instanceAxios, {
-  useAction,
-  useGet,
-  API_HOST,
-} from '@web/shared/apis/index';
+import strapiAxios, { useAction, useGet, API_HOST } from '@web/shared/apis';
+import { IUseGetOptions } from '@web/shared/types/apis/index';
 
 // 소셜 로그인
 export const useProviderSignIn = () => {
   return useAction(async (provider, access_token) => {
-    const res = await instanceAxios.get(
-      `${API_HOST}/auth/${provider}/callback`,
-      {
-        params: {
-          access_token,
-        },
+    const res = await strapiAxios.get(`${API_HOST}/auth/${provider}/callback`, {
+      params: {
+        access_token,
       },
-    );
+    });
 
     return res.data;
   });
@@ -25,7 +17,7 @@ export const useProviderSignIn = () => {
 // 로그인
 export const useSignIn = () => {
   return useAction(async (identifier, password) => {
-    const res = await instanceAxios.post(`${API_HOST}/auth/local`, {
+    const res = await strapiAxios.post(`${API_HOST}/auth/local`, {
       identifier,
       password,
     });
@@ -37,21 +29,18 @@ export const useSignIn = () => {
 // 회원가입
 export const useSignUp = () => {
   return useAction(async data => {
-    const res = await instanceAxios.post(
-      `${API_HOST}/auth/local/register`,
-      data,
-    );
+    const res = await strapiAxios.post(`${API_HOST}/auth/local/register`, data);
 
     return res.data;
   });
 };
 
 // 로그인 한 회원정보 가져오기
-export const useGetMe = (options: SWRConfiguration) => {
+export const useGetMe = (options?: IUseGetOptions) => {
   return useGet(
     '/users/me',
     async () => {
-      const res = await instanceAxios.get(`${API_HOST}/users/me`);
+      const res = await strapiAxios.get(`${API_HOST}/users/me`);
       return res.data;
     },
     options,

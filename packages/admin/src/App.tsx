@@ -1,9 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { SWRConfig } from 'swr';
-
-import instanceAxios from '@web/shared/apis';
 import URouteSwitch from '@web/shared/routes/URouteSwitch';
 
 import routes from './config/route';
@@ -16,19 +13,12 @@ function App() {
   const dispatch = useDispatch();
 
   return (
-    <SWRConfig
-      value={{
-        revalidateOnFocus: false,
-        fetcher: async url => (await instanceAxios.get(url)).data,
-      }}
-    >
-      <URouteSwitch
-        routes={routes}
-        templateProps={defaultTemplateProps}
-        dispatch={dispatch}
-        history={history}
-      />
-    </SWRConfig>
+    <URouteSwitch
+      routes={routes}
+      templateProps={defaultTemplateProps}
+      dispatch={dispatch}
+      history={history}
+    />
   );
 }
 

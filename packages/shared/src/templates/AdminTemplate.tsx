@@ -25,16 +25,7 @@ export default React.memo(function AdminTemplate({
   }, []);
   return (
     <Layout>
-      <Sider
-        breakpoint="lg"
-        collapsedWidth="0"
-        onBreakpoint={broken => {
-          console.log(broken);
-        }}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
-        }}
-      >
+      <Sider breakpoint="lg" collapsedWidth="0">
         <div className="logo" />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
           {menus &&
