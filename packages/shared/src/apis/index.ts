@@ -72,7 +72,6 @@ export const APIFetcher = async (url: string) => {
  */
 export const useGet = (
   key: Key,
-  fetcher: any = APIFetcher,
   options: IUseGetOptions = {},
 ): IUseGetReturn => {
   const {
@@ -80,11 +79,7 @@ export const useGet = (
     error,
     isValidating,
     mutate: reload,
-  } = useSWR(
-    options.enabled === false ? null : key,
-    fetcher || APIFetcher,
-    options,
-  );
+  } = useSWR(options.enabled === false ? null : key, APIFetcher, options);
 
   const isLoading = data === undefined && isValidating;
 
@@ -116,7 +111,7 @@ export const useGetAPI = (
     url += `?${qs.stringify(options.qs)}`;
   }
 
-  const returnValue = useGet(url, undefined, options);
+  const returnValue = useGet(url, options);
 
   returnValue.data =
     returnValue.data || (options.count ? undefined : options.id ? {} : []);

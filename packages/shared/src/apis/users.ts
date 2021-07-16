@@ -39,14 +39,5 @@ export const useSignUp = () => {
 
 // 로그인 한 회원정보 가져오기
 export const useGetMe = (options?: IUseGetOptions) => {
-  return useGet(
-    '/users/me',
-    async () => {
-      // 테스트를 위한 코드 (실제 개발시 지워주세요)
-      await delay(1000);
-      const res = await strapiAxios.get(`${API_HOST}/users/me`);
-      return res.data;
-    },
-    options,
-  );
+  return useGet('/users/me', options);
 };
