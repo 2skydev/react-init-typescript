@@ -61,7 +61,7 @@ strapiAxios.interceptors.request.use(
 export const APIFetcher = async (url: string) => {
   try {
     const res = await strapiAxios.get(url);
-    return res;
+    return res.data;
   } catch (error) {
     throw new Error(error);
   }
