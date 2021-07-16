@@ -35,6 +35,7 @@ export default function Shared({
     >
       <SWRConfig
         value={{
+          shouldRetryOnError: false,
           revalidateOnFocus: false,
           fetcher: APIFetcher,
           onError: handleOnError,
