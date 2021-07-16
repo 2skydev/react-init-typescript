@@ -9,8 +9,8 @@ const config = {
    */
   input: [
     'api',
-    '../../node_modules/strapi-plugin-users-permissions/models/',
-    '../../node_modules/strapi-plugin-upload/models/'
+    'node_modules/strapi-plugin-users-permissions/models/',
+    'node_modules/strapi-plugin-upload/models/',
   ],
   // components: './components/',
   output: '../shared/src/types/strapi/',
@@ -21,7 +21,10 @@ const config = {
   enum: true,
   nested: false,
   // excludeField: (interfaceName, fieldName) => fieldName === 'hide_field',
-  addField: (interfaceName) => [{ name: "created_at", type: "string" }, { name: "updated_at", type: "string" }],
+  addField: interfaceName => [
+    { name: 'created_at', type: 'string' },
+    { name: 'updated_at', type: 'string' },
+  ],
 
   /**
    * optional, builtin function used if undefined return
@@ -32,5 +35,5 @@ const config = {
   // enumName: (name, interfaceName) => `Enum${interfaceName}${name}`,
   // importAsType: (interfaceName) => interfaceName === 'MyInterfaceThatWantsToImportAsTypes' /* or just true */,
   // outputFileName: (interfaceName, filename) => interfaceName
-}
+};
 module.exports = config;

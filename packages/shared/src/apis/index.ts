@@ -81,7 +81,7 @@ export const useGet = (
     isValidating,
     mutate: reload,
   } = useSWR(
-    options.enabled === true ? key : null,
+    options.enabled === false ? null : key,
     fetcher || APIFetcher,
     options,
   );
