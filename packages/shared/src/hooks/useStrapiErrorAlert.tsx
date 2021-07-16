@@ -5,7 +5,7 @@ import useAuth from '@web/shared/hooks/useAuth';
 import { getErrorMessage } from '@web/shared/utils/strapi';
 
 export default function useStrapiErrorAlert() {
-  const { signOut } = useAuth();
+  const { signOut, getToken } = useAuth();
 
   const handleErrorAlert = (error: AxiosResponse) => {
     // 에러가 없을 경우
@@ -72,9 +72,7 @@ export default function useStrapiErrorAlert() {
 
       // 403: 접근 제한 오류 (권한 없음)
       case 403: {
-        const token: string | null =
-          window.localStorage.getItem('user.token') ||
-          window.sessionStorage.getItem('user.token');
+        const token: string | null = getToken();
 
         Modal.error({
           title: '요청 오류',
