@@ -32,6 +32,8 @@
     "start:admin": "lerna run develop --stream --scope @web/admin",
     "start:strapi": "lerna run develop --stream --scope @web/strapi",
     "start:all": "lerna run develop --stream --scope @web/admin --scope @web/client --scope @web/strapi",
+    "start:admin:strapi": "lerna run develop --stream --scope @web/admin --scope @web/strapi",
+    "start:client:strapi": "lerna run develop --stream --scope @web/client --scope @web/strapi",
     "build": "lerna run build --stream --scope @web/admin --scope @web/client",
     "build:client": "lerna run build --stream --scope @web/client",
     "build:admin": "lerna run build --stream --scope @web/admin",
