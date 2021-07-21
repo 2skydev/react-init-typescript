@@ -51,7 +51,7 @@ export const getFile = async (mediaItem: IFile) => {
  * Strapi REST API 요청하는데 사용하는 body를 생성하는 함수
  * - data: 요청 보낼때 사용하는 body 데이터 (파일이 있을 경우에도 객체로 보내주세요)
  */
-export const createBody = async (data: IAnyObject) => {
+export const createBody = (data: IAnyObject) => {
   const hasFile = Object.values(data).some(
     fieldValue => fieldValue instanceof Blob,
   );
