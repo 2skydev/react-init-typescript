@@ -9,6 +9,8 @@ import Bootstrap from '@web/shared/components/bootstrap/Bootstrap';
 import { Provider } from '@web/shared/contexts/SharedContext';
 import useStrapiErrorAlert from '@web/shared/hooks/useStrapiErrorAlert';
 
+import './shared.css';
+
 interface IProps {
   store: any;
   swrConfig?: SWRConfiguration;

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import ReactPlayer from 'react-player';
 
 import { Button } from 'antd';
 import { useFormik } from 'formik';
@@ -17,20 +16,15 @@ import {
 import Modal from '@web/shared/components/modal/Modal';
 import UseConfirm from '@web/shared/components/modal/UseConfirm';
 
-import SampleVideo from '@web/client/src/assets/video.mp4';
-
 export default function FormTest() {
   const { confirm } = UseConfirm();
   const [open, setOpen] = useState(false);
-  const [playing, setPlaying] = useState(false);
   const formik = useFormik({
     initialValues: {
       email: '123',
       select: 'test1',
       checkbox: 'test1',
       radio: 'test2',
-      /* date: '2020-11-11', */
-      /* term: ['2020-11-11', '2020-11-12'], */
     },
     onSubmit: async values => {
       return 'test';
@@ -41,9 +35,6 @@ export default function FormTest() {
         .typeError('테스트')
         .required('아이디는 숫자만 입력 가능'),
       select: yup.string().required(),
-      /* checkbox: yup.array().min(1, '2개이상 선택'), */
-      /* date: yup.string().typeError('타입에러').required('날짜 선택'), */
-      /* term: yup.array().min(2, '기간 선택 에러').required(), */
     }),
   });
 
@@ -110,22 +101,6 @@ export default function FormTest() {
 
         <button>submit</button>
       </Form>
-
-      <div className="videoBox">
-        <div className="video">
-          <ReactPlayer
-            playsinline={true}
-            url={SampleVideo}
-            onSeek={() => {
-              alert('잘못된 방식 영상 재시청');
-            }}
-            playing={playing}
-          />
-        </div>
-
-        <button onClick={() => setPlaying(true)}>PLAY</button>
-        <button onClick={() => setPlaying(false)}>PAUSE</button>
-      </div>
     </div>
   );
 }

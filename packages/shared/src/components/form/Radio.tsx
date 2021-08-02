@@ -32,11 +32,15 @@ export default function Radio({
     >
       <AntRadio.Group
         name={name}
-        defaultValue={formik.values[name] || options[0].value}
+        value={formik.values[name] || options[0].value}
         onChange={onChange}
       >
         {options.map(v => (
-          <div key={v.value} style={v?.style ? v.style : {}}>
+          <div
+            key={v.value}
+            style={v?.style ? v.style : {}}
+            className="radioBox"
+          >
             <AntRadio value={v.value}>{v.label}</AntRadio>
             {v?.children && v.children}
           </div>

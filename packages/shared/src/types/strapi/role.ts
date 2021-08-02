@@ -5,7 +5,7 @@ import { IUser } from './user';
  * Model definition for role
  */
 export interface IRole {
-  id: string;
+  id: number;
   name: string;
   description?: string;
   type?: string;

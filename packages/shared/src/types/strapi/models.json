@@ -1,0 +1,240 @@
+[
+  {
+    "info": {
+      "name": "role",
+      "description": ""
+    },
+    "pluginOptions": {
+      "content-manager": {
+        "visible": false
+      }
+    },
+    "attributes": {
+      "name": {
+        "type": "string",
+        "minLength": 3,
+        "required": true,
+        "configurable": false
+      },
+      "description": {
+        "type": "string",
+        "configurable": false
+      },
+      "type": {
+        "type": "string",
+        "unique": true,
+        "configurable": false
+      },
+      "permissions": {
+        "collection": "permission",
+        "via": "role",
+        "plugin": "users-permissions",
+        "configurable": false,
+        "isVirtual": true
+      },
+      "users": {
+        "collection": "user",
+        "via": "role",
+        "configurable": false,
+        "plugin": "users-permissions"
+      }
+    },
+    "collectionName": "users-permissions_role",
+    "_filename": "/Volumes/SSD1/workspaces/react-init/node/packages/strapi/node_modules/strapi-plugin-users-permissions/models/Role.settings.json"
+  },
+  {
+    "info": {
+      "name": "permission",
+      "description": ""
+    },
+    "pluginOptions": {
+      "content-manager": {
+        "visible": false
+      }
+    },
+    "attributes": {
+      "type": {
+        "type": "string",
+        "required": true,
+        "configurable": false
+      },
+      "controller": {
+        "type": "string",
+        "required": true,
+        "configurable": false
+      },
+      "action": {
+        "type": "string",
+        "required": true,
+        "configurable": false
+      },
+      "enabled": {
+        "type": "boolean",
+        "required": true,
+        "configurable": false
+      },
+      "policy": {
+        "type": "string",
+        "configurable": false
+      },
+      "role": {
+        "model": "role",
+        "via": "permissions",
+        "plugin": "users-permissions",
+        "configurable": false
+      }
+    },
+    "_filename": "/Volumes/SSD1/workspaces/react-init/node/packages/strapi/node_modules/strapi-plugin-users-permissions/models/Permission.settings.json"
+  },
+  {
+    "kind": "collectionType",
+    "collectionName": "users-permissions_user",
+    "info": {
+      "name": "user",
+      "description": ""
+    },
+    "options": {
+      "draftAndPublish": false,
+      "timestamps": true
+    },
+    "attributes": {
+      "username": {
+        "type": "string",
+        "minLength": 3,
+        "unique": true,
+        "configurable": false,
+        "required": true
+      },
+      "email": {
+        "type": "email",
+        "minLength": 6,
+        "configurable": false,
+        "required": true
+      },
+      "provider": {
+        "type": "string",
+        "configurable": false
+      },
+      "password": {
+        "type": "password",
+        "minLength": 6,
+        "configurable": false,
+        "private": true
+      },
+      "resetPasswordToken": {
+        "type": "string",
+        "configurable": false,
+        "private": true
+      },
+      "confirmationToken": {
+        "type": "string",
+        "configurable": false,
+        "private": true
+      },
+      "confirmed": {
+        "type": "boolean",
+        "default": false,
+        "configurable": false
+      },
+      "blocked": {
+        "type": "boolean",
+        "default": false,
+        "configurable": false
+      },
+      "role": {
+        "model": "role",
+        "via": "users",
+        "plugin": "users-permissions",
+        "configurable": false
+      }
+    },
+    "_filename": "/Volumes/SSD1/workspaces/react-init/node/packages/strapi/extensions/users-permissions/models/User.settings.json"
+  },
+  {
+    "info": {
+      "name": "file",
+      "description": ""
+    },
+    "options": {
+      "timestamps": true
+    },
+    "pluginOptions": {
+      "content-manager": {
+        "visible": false
+      },
+      "content-type-builder": {
+        "visible": false
+      }
+    },
+    "attributes": {
+      "name": {
+        "type": "string",
+        "configurable": false,
+        "required": true
+      },
+      "alternativeText": {
+        "type": "string",
+        "configurable": false
+      },
+      "caption": {
+        "type": "string",
+        "configurable": false
+      },
+      "width": {
+        "type": "integer",
+        "configurable": false
+      },
+      "height": {
+        "type": "integer",
+        "configurable": false
+      },
+      "formats": {
+        "type": "json",
+        "configurable": false
+      },
+      "hash": {
+        "type": "string",
+        "configurable": false,
+        "required": true
+      },
+      "ext": {
+        "type": "string",
+        "configurable": false
+      },
+      "mime": {
+        "type": "string",
+        "configurable": false,
+        "required": true
+      },
+      "size": {
+        "type": "decimal",
+        "configurable": false,
+        "required": true
+      },
+      "url": {
+        "type": "string",
+        "configurable": false,
+        "required": true
+      },
+      "previewUrl": {
+        "type": "string",
+        "configurable": false
+      },
+      "provider": {
+        "type": "string",
+        "configurable": false,
+        "required": true
+      },
+      "provider_metadata": {
+        "type": "json",
+        "configurable": false
+      },
+      "related": {
+        "collection": "*",
+        "filter": "field",
+        "configurable": false
+      }
+    },
+    "_filename": "/Volumes/SSD1/workspaces/react-init/node/packages/strapi/node_modules/strapi-plugin-upload/models/File.settings.json"
+  }
+]

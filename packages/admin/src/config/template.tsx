@@ -1,41 +1,33 @@
-import { UserOutlined, LaptopOutlined } from '@ant-design/icons';
-
 import { ITemplateProps, TTemplateKey } from '@web/shared/templates';
 import { IAdminTemplateProps } from '@web/shared/templates/AdminTemplate';
 
 export const adminTemplateProps: IAdminTemplateProps = {
   menus: [
     {
-      name: '메뉴1',
-      icon: <UserOutlined />,
+      name: '회원',
+      link: '/',
       subMenu: [
         {
-          name: '메뉴 1-1',
+          name: '회원 목록',
           link: '/',
-        },
-        {
-          name: '메뉴 1-2',
-          link: '/test',
         },
       ],
     },
     {
-      name: '메뉴2',
-      icon: <LaptopOutlined />,
+      name: '테스트',
+      link: '/test1',
       subMenu: [
         {
-          name: '메뉴 2-1',
-          link: '/',
+          name: 'test1',
+          link: '/test1',
         },
         {
-          name: '메뉴 2-2',
-          link: '/test',
+          name: 'test2',
+          link: '/test2',
         },
       ],
     },
   ],
-  logo: '',
-  footer: 'this is footer',
 };
 
 const defaultTemplateProps = {

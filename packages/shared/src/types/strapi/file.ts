@@ -2,7 +2,7 @@
  * Model definition for file
  */
 export interface IFile {
-  id: string;
+  id: number;
   name: string;
   alternativeText?: string;
   caption?: string;

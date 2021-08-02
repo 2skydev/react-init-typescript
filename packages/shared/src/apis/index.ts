@@ -63,9 +63,11 @@ export const APIFetcher = async (url: string) => {
     const res = await strapiAxios.get(url);
     return res.data;
   } catch (error) {
-    throw new Error(error);
+    throw error.response;
   }
 };
+
+const keys = new Set();
 
 /*
  * useSWR 레퍼 함수
@@ -74,20 +76,29 @@ export const useGet = (
   key: Key,
   options: IUseGetOptions = {},
 ): IUseGetReturn => {
+  let url = key as string;
+
+  if (options.qs && Object.keys(options.qs as Record<string, unknown>).length) {
+    url += `?${qs.stringify(options.qs)}`;
+  }
+
+  keys.add(url);
+
   const {
     data,
     error,
     isValidating,
     mutate: reload,
-  } = useSWR(options.enabled === false ? null : key, APIFetcher, options);
+  } = useSWR(options.enabled === false ? null : url, APIFetcher, options);
 
   const isLoading = data === undefined && isValidating;
 
   return {
     data,
     isLoading,
-    isFetching: isValidating,
+    isFetching: isValidating || false,
     error,
+    key: url as string,
     reload,
   };
 };
@@ -107,14 +118,7 @@ export const useGetAPI = (
     url += `/count`;
   }
 
-  if (options.qs) {
-    url += `?${qs.stringify(options.qs)}`;
-  }
-
   const returnValue = useGet(url, options);
-
-  returnValue.data =
-    returnValue.data || (options.count ? undefined : options.id ? {} : []);
 
   return returnValue;
 };
@@ -158,11 +162,22 @@ const actionStateReducer = (
 };
 
 /*
+ * 정규식으로 mutate
+ */
+export const regexMutate = (regex: RegExp) => {
+  keys.forEach(key => {
+    if (regex.test(key as string)) {
+      mutate(key as string);
+    }
+  });
+};
+
+/*
  * react-query의 useMutation 함수와 같이 만든 함수
  */
 export const useAction = (
   asyncFn: (...data: any) => Promise<any>,
-  mutateKeys: Key[] = [],
+  mutateKeys: any[] = [],
 ): IUseActionReturn => {
   const { onError } = React.useContext(sharedContext);
   const [state, dispatch] = React.useReducer(
@@ -177,7 +192,11 @@ export const useAction = (
       const res = await asyncFn(...data);
 
       for (const mutateKey of mutateKeys) {
-        mutate(mutateKey);
+        if (mutateKey instanceof RegExp) {
+          regexMutate(mutateKey);
+        } else {
+          mutate(mutateKey);
+        }
       }
 
       dispatch({ key: 'actionAfter', value: { data: res } });
@@ -201,7 +220,15 @@ export const useAction = (
   };
 };
 
-export const useActionAPI = (table: TCollection, mutateKeys: Key[] = []) => {
+interface IUseActionAPIOptions {
+  disableAutoMutation?: boolean;
+  mutateKeys?: string[];
+}
+
+export const useActionAPI = (
+  table: TCollection,
+  options?: IUseActionAPIOptions,
+) => {
   const [methodState, setMethodState] = React.useState<TMethod | null>(null);
 
   const { action: originAction, ...originStates } = useAction(
@@ -210,7 +237,9 @@ export const useActionAPI = (table: TCollection, mutateKeys: Key[] = []) => {
       const res = await strapiAxios[method](url, data);
       return res.data;
     },
-    mutateKeys,
+    options?.disableAutoMutation || options?.mutateKeys
+      ? options.mutateKeys || []
+      : [new RegExp(`^\\/${table}(\\/.*)?(\\?.*)?`)],
   );
 
   const action = async (method: TMethod, data: any, id?: number) => {

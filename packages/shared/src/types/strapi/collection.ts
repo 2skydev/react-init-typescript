@@ -1,1 +1,1 @@
-export type TCollection = 'posts';
+export type TCollection = 'users';

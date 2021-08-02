@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+body, html, input, textarea, button {
+  font-family: 'Noto Sans KR' !important;
+}
+
+.ant-modal-mask {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  backdrop-filter: saturate(180%) blur(5px);
+}
+
+.ant-modal-content {
+  border-radius: 10px !important;
+}
+
+.ant-btn {
+  border-radius: 4px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.ant-popover-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ant-popover-buttons .ant-btn {
+  border-radius: 4px !important;
+}
+
+.ant-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ant-table-thead > tr > th,
+.ant-table-cell-fix-right,
+.ant-table-cell-fix-left {
+  /* background: white !important; */
+}
+
+.ant-notification-notice {
+  border-radius: 6px !important;
+}

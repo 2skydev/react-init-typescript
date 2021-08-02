@@ -38,5 +38,8 @@
     "build:client": "lerna run build --stream --scope @web/client",
     "build:admin": "lerna run build --stream --scope @web/admin",
     "kill-port": "npx kill-port --port 3000,3001,1337"
+  },
+  "dependencies": {
+    "clsx": "^1.1.1"
   }
 }

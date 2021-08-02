@@ -3,6 +3,7 @@ import React, { ReactNode } from 'react';
 import { Modal as AntModal, Button } from 'antd';
 
 interface ModalTypes {
+  className?: string;
   open: boolean;
   onClose: any;
   title?: string;
@@ -12,6 +13,7 @@ interface ModalTypes {
   children: ReactNode;
   footer?: Array<ReactNode>;
   width?: number;
+  removeFooter?: boolean;
 }
 
 const Modal = ({
@@ -24,6 +26,8 @@ const Modal = ({
   closeTxt = '닫기',
   footer = [],
   width = 550,
+  className,
+  removeFooter = false,
 }: ModalTypes) => {
   const [confirmLoading, setConfirmLoading] = React.useState(false);
 
@@ -38,24 +42,31 @@ const Modal = ({
     <>
       <AntModal
         centered
+        className={className}
         title={title}
         visible={open}
         confirmLoading={confirmLoading}
         onCancel={onClose}
-        footer={[
-          <Button key="back" onClick={onClose}>
-            {closeTxt}
-          </Button>,
-          <Button
-            key="submit"
-            type="primary"
-            loading={confirmLoading}
-            onClick={onSubmit}
-          >
-            {okTxt}
-          </Button>,
-          ...footer,
-        ]}
+        footer={
+          removeFooter
+            ? false
+            : [
+                <Button key="back" onClick={onClose}>
+                  {closeTxt}
+                </Button>,
+                <Button
+                  key="submit"
+                  type="primary"
+                  loading={confirmLoading}
+                  onClick={() => {
+                    submit ? onSubmit() : onClose();
+                  }}
+                >
+                  {okTxt}
+                </Button>,
+                ...footer,
+              ]
+        }
         width={width}
       >
         {children}

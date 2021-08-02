@@ -1,8 +1,6 @@
 import strapiAxios, { useAction, useGet, API_HOST } from '@web/shared/apis';
 import { IUseGetOptions } from '@web/shared/types/apis/index';
 
-import { delay } from './../utils/index';
-
 // 소셜 로그인
 export const useProviderSignIn = () => {
   return useAction(async (provider, access_token) => {

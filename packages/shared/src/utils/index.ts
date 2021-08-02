@@ -1,3 +1,5 @@
+import QueryString from 'qs';
+
 /*
  * 첫글자만 대문자로 변경
  * - str: 첫글자만 대문자로 변경할 문자열
@@ -27,3 +29,10 @@ export const delay = (ms = 1000) =>
   new Promise(res => {
     setTimeout(res, ms);
   });
+
+/*
+ * Query string 가져오기
+ */
+export const getQS = () => {
+  return QueryString.parse(window.location.search, { ignoreQueryPrefix: true });
+};

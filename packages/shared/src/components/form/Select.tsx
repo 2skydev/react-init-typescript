@@ -15,6 +15,7 @@ interface SelectTypes {
   label?: string;
   helperText?: string;
   options: Array<OptionType>;
+  nullValue?: any;
 }
 
 export default function Select({
@@ -22,6 +23,7 @@ export default function Select({
   label,
   options,
   helperText,
+  nullValue = '',
 }: SelectTypes) {
   const formik = useContext(FormikContext);
   const error = formik.errors[name];
@@ -35,8 +37,12 @@ export default function Select({
       label={label}
       error={error ? helperText || (error as string) : ''}
     >
-      <AntSelect defaultValue={formik.values[name]} onChange={onChange}>
-        <AntSelect.Option value="">선택</AntSelect.Option>
+      <AntSelect
+        style={{ width: '100%' }}
+        value={formik.values[name]}
+        onChange={onChange}
+      >
+        <AntSelect.Option value={nullValue}>선택</AntSelect.Option>
 
         {options.map(v => (
           <AntSelect.Option key={v.value} value={v.value}>

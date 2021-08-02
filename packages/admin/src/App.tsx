@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import URouteSwitch from '@web/shared/routes/URouteSwitch';
 
+import { AppStyle } from './AppStyle';
 import routes from './config/route';
 import defaultTemplateProps from './config/template';
 
@@ -13,12 +14,14 @@ function App() {
   const dispatch = useDispatch();
 
   return (
-    <URouteSwitch
-      routes={routes}
-      templateProps={defaultTemplateProps}
-      dispatch={dispatch}
-      history={history}
-    />
+    <AppStyle id="AppStyle">
+      <URouteSwitch
+        routes={routes}
+        templateProps={defaultTemplateProps}
+        dispatch={dispatch}
+        history={history}
+      />
+    </AppStyle>
   );
 }
 

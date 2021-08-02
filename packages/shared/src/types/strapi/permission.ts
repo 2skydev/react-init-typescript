@@ -4,7 +4,7 @@ import { IRole } from './role';
  * Model definition for permission
  */
 export interface IPermission {
-  id: string;
+  id: number;
   type: string;
   controller: string;
   action: string;

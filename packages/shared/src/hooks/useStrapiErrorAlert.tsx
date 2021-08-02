@@ -35,7 +35,17 @@ export default function useStrapiErrorAlert() {
           break;
         }
 
-        // bad request
+        // bad request format 1
+        if (getErrorMessage(error.data.message, true)) {
+          Modal.error({
+            title: '요청 오류',
+            content: getErrorMessage(error.data.message),
+          });
+          console.error('[Strapi] Bad Request format 1', error);
+          break;
+        }
+
+        // bad request format 2
         if (
           Array.isArray(error.data.message) &&
           Array.isArray(error.data.message[0].messages)
@@ -45,7 +55,7 @@ export default function useStrapiErrorAlert() {
             title: '요청 오류',
             content: getErrorMessage(errorItem.id),
           });
-          console.error('[Strapi] Bad Request', error);
+          console.error('[Strapi] Bad Request format 2', error);
           break;
         }
 

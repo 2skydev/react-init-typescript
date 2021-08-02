@@ -9,6 +9,7 @@ export interface IUseGetReturn {
   isLoading: boolean;
   isFetching: boolean;
   error: any;
+  key: string;
   reload: (
     data?: any | Promise<any> | MutatorCallback<any>,
     shouldRevalidate?: boolean,
@@ -17,12 +18,12 @@ export interface IUseGetReturn {
 
 export interface IUseGetOptions extends SWRConfiguration {
   enabled?: boolean;
+  qs?: IAnyObject;
 }
 
 export interface IUseGetAPIOptions extends IUseGetOptions {
   id?: number;
   count?: boolean;
-  qs?: IAnyObject;
 }
 
 // useAction types

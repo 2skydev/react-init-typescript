@@ -51,7 +51,7 @@ export const getFile = async (mediaItem: IFile) => {
  * Strapi REST API 요청하는데 사용하는 body를 생성하는 함수
  * - data: 요청 보낼때 사용하는 body 데이터 (파일이 있을 경우에도 객체로 보내주세요)
  */
-export const createBody = async (data: IAnyObject) => {
+export const createBody = (data: IAnyObject) => {
   const hasFile = Object.values(data).some(
     fieldValue => fieldValue instanceof Blob,
   );
@@ -106,13 +106,39 @@ export const errorMessages: { [key: string]: string } = {
   'Auth.form.error.email.taken': '이미 사용중인 이메일입니다',
   'Auth.form.error.username.taken': '이미 사용중인 이름입니다',
   'Auth.form.error.user.not-exist': '해당 이메일은 존재하지 않습니다',
+  'password.notNull': '비밀번호는 Null값이 될 수 없습니다',
 
   // custom error message
   // 'Enter.term.error': '{message}',
 };
 
-export const getErrorMessage = (messageID: string) => {
-  return errorMessages[messageID] || '알수없는 오류가 발생했습니다';
+export const getErrorMessage = (messageID: string, orReturnFalse = false) => {
+  return (
+    errorMessages[messageID] ||
+    (orReturnFalse ? false : '알수없는 오류가 발생했습니다')
+  );
+};
+
+export const coverToFileFormat = (file: IFile | IFile[] | undefined) => {
+  if (!file) {
+    return null;
+  }
+
+  return Array.isArray(file)
+    ? file.map(_file => ({
+        uid: _file.id,
+        name: _file.name,
+        status: 'done',
+        url: getFileURL(_file),
+        thumbUrl: getFileURL(_file),
+      }))
+    : {
+        uid: file.id,
+        name: file.name,
+        status: 'done',
+        url: getFileURL(file),
+        thumbUrl: getFileURL(file),
+      };
 };
 
 // export const throwErrorMessage = (errorID, message) => {
